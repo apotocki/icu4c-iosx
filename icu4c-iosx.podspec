@@ -6,7 +6,11 @@ Pod::Spec.new do |s|
     s.license      = "BSD"
     s.author       = { "Alexander Pototskiy" => "alex.a.potocki@gmail.com" }
     s.social_media_url = "https://www.linkedin.com/in/alexander-pototskiy-62852a93"
-    s.platform     = :ios, "12.0"
+    s.ios.deployment_target = "12.0"
+    s.osx.deployment_target = "11.0"
+    s.osx.pod_target_xcconfig = { 'VALID_ARCHS' => 'macos-x86_64 macos-arm64' }
+    s.ios.pod_target_xcconfig = { 'VALID_ARCHS' => 'ios-arm64 ios-x86_64-simulator ios-arm64-simulator' }
+    s.static_framework = true
     s.prepare_command = "sh scripts/build.sh"
     s.source       = { :git => "https://github.com/apotocki/icu4c-iosx.git", :branch => "#{s.version}", :submodules => "true" }
     s.source_files = "product/include/**/*.{h}"
