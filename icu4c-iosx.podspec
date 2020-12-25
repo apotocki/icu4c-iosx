@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.social_media_url = "https://www.linkedin.com/in/alexander-pototskiy-62852a93"
     s.platform     = :ios, "12.0"
     s.prepare_command = "sh scripts/build.sh"
-    s.source       = { :git => "https://github.com/apotocki/icu4c-iosx", :branch => "#{s.version}", :submodules => "true" }
+    s.source       = { :git => "https://github.com/apotocki/icu4c-iosx.git", :branch => "#{s.version}", :submodules => "true" }
     s.source_files = "product/include/**/*.{h}"
     s.header_mappings_dir = "product/include"
     s.public_header_files = "product/include/**/*.{h}"
