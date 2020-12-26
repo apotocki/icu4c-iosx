@@ -16,11 +16,12 @@ This repo provides a universal script for building static ICU libraries for use 
 
     # have fun, the result artifacts  will be located in 'product' folder.
 ```    
- - Use cocoapods. Add one of the following line into your project's Podfile:
+ - Use cocoapods. Add the following lines into your project's Podfile:
 ```
+    use_frameworks!
     pod 'icu4c-iosx'
     # or optionally more precisely
-    pod 'icu4c-iosx', git: 'https://github.com/apotocki/icu4c-iosx', :branch => '68', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :branch => '68', :submodules => 'true'
 ```    
 install new dependency:
 ```
