@@ -1,6 +1,6 @@
 ## ICU for iOS and Mac OS X - arm64 / x86_64
 
-Supported version: 68
+Supported version: 68.2
 
 This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "68" branch corresponds to "maint/maint-68" branch.
 
@@ -8,7 +8,7 @@ This repo provides a universal script for building static ICU libraries for use 
  - Manually
 ```
     # clone the repo
-    git clone -b 68 --recurse-submodules --remote-submodules https://github.com/apotocki/icu4c-iosx
+    git clone -b 68.2.1 --recursive https://github.com/apotocki/icu4c-iosx
     
     # build libraries
     cd icu4c-iosx
@@ -21,7 +21,7 @@ This repo provides a universal script for building static ICU libraries for use 
     use_frameworks!
     pod 'icu4c-iosx'
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :branch => '68', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '68.2.1', :submodules => 'true'
 ```    
 install new dependency:
 ```
