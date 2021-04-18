@@ -12,6 +12,9 @@ ICU_VER_NAME=icu4c-${ICU_VER//\//-}
 BUILD_DIR="$( cd "$( dirname "./" )" >/dev/null 2>&1 && pwd )"
 INSTALL_DIR="$BUILD_DIR/product"
 
+if [ "$HOST_ARC" = "arm64" ]; then
+	HOST_ARC=arm
+fi
 ################### BUILD FOR MAC OSX
 ICU_BUILD_FOLDER=$ICU_VER_NAME-build
 ICU4C_FOLDER=icu/icu4c

@@ -4,6 +4,11 @@ Supported version: 69.1, 68.2
 
 This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "69" branch corresponds to "maint/maint-69" branch.
 
+## Prerequisites
+  1) Xcode must be installed because xcodebuild is used to create xcframeworks
+  2) ```xcode-select -p``` must point to Xcode app developer directory (by default e.g. /Applications/Xcode.app/Contents/Developer). If it points to CommandLineTools directory you should execute:
+  ```sudo xcode-select --reset``` or ```sudo xcode-select -s /Applications/Xcode.app/Contents/Developer```
+  
 ## How to build?
  - Manually
 ```
