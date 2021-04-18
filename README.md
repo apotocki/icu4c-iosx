@@ -1,4 +1,4 @@
-## ICU for iOS and Mac OS X - arm64 / x86_64
+## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) - arm64 / x86_64
 
 Supported version: 69.1, 68.2
 
@@ -31,9 +31,5 @@ This repo provides a universal script for building static ICU libraries for use 
 install new dependency:
 ```
    pod install --verbose
-```    
- ## Troubleshooting.
-  In case of error "ARCHS[@]: unbound variable" during the building of your XCode project:
-  1) Open: Pods -> Build Settings.
-  2) Select target 'icu4c-iosx'
-  3) Find VALID_ARCHS variable and set appropriate value. E.g. "arm64 X86_64"
+```
+
