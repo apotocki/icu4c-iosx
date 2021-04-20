@@ -19,7 +19,7 @@ class icu4c_demoTests: XCTestCase {
     }
 
     func testExample() throws {
-        XCTAssertEqual(icuToUpper("test_string"), "TEST_STRING", "wrong")
+        XCTAssertEqual(icuToUpper("test_ПрЮвет!"), "TEST_ПРЮВЕТ!", "wrong")
     }
 
     func testPerformanceExample() throws {

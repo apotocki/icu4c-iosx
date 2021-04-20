@@ -1,4 +1,4 @@
-## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) - arm64 / x86_64
+## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
 Supported version: 69.1, 68.2
 
