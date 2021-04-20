@@ -1,4 +1,4 @@
-## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) - arm64 / x86_64
+## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
 Supported version: 69.1, 68.2
 
@@ -13,7 +13,7 @@ This repo provides a universal script for building static ICU libraries for use 
  - Manually
 ```
     # clone the repo
-    git clone -b 69.1.v1 --recursive https://github.com/apotocki/icu4c-iosx
+    git clone -b 69.1.1 --recursive https://github.com/apotocki/icu4c-iosx
     
     # build libraries
     cd icu4c-iosx
@@ -26,10 +26,9 @@ This repo provides a universal script for building static ICU libraries for use 
     use_frameworks!
     pod 'icu4c-iosx'
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '69.1.v1', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '~> 69.1.1', :submodules => 'true'
 ```    
 install new dependency:
 ```
    pod install --verbose
 ```
-
