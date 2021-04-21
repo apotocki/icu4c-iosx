@@ -1,0 +1,29 @@
+--- icu/icu4c/source/configure
++++ icu/icu4c/source/configure
+***************
+*** 645,650 ****
+--- 645,652 ----
+  DATA_PACKAGING_MODE
+  thepkgicudatadir
+  pkgicudatadir
++ U_HAVE_DATA
++ DATA_TRUE
+  U_HAVE_TOOLS
+  TOOLS_TRUE
+  U_HAVE_LAYOUTEX
+***************
+*** 7641,7646 ****
+--- 7643,7655 ----
+    U_HAVE_TOOLS=0
+  fi
+  
++ if test "$tools" = true || test "$cross_compiling" = "yes"; then
++   DATA_TRUE=
++   U_HAVE_DATA=1
++ else
++   DATA_TRUE='#'
++   U_HAVE_DATA=0
++ fi
+  
+  # Check whether --with-data-packaging was given.
+  if test "${with_data_packaging+set}" = set; then :
