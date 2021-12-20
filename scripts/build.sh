@@ -4,7 +4,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-ICU_VER=maint/maint-69
+ICU_VER=maint/maint-70
 ################## SETUP END
 DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -23,9 +23,9 @@ fi
 ICU_BUILD_FOLDER=$ICU_VER_NAME-build
 ICU4C_FOLDER=icu/icu4c
 
-#explicit 69.1
+#explicit 70.1
 pushd icu
-git reset --hard 0e7b4428866f3133b4abba2d932ee3faa708db1d
+git reset --hard a56dde820dc35665a66f2e9ee8ba58e75049b668
 popd
 
 if [ ! -f $ICU_BUILD_FOLDER.success ]; then
@@ -56,7 +56,7 @@ cp -r $ICU4C_FOLDER $ICU_CATALYST_BUILD_FOLDER
 echo "building icu (mac osx: Catalyst)..."
 pushd $ICU_CATALYST_BUILD_FOLDER/source
 
-COMMON_CFLAGS="-arch $HOST_ARC --target=$BUILD_ARC-apple-ios-macabi -isysroot $MACSYSROOT -I$MACSYSROOT/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/System/iOSSupport/usr/include -iframework $MACSYSROOT/System/iOSSupport/System/Library/Frameworks"
+COMMON_CFLAGS="-arch $HOST_ARC --target=$BUILD_ARC-apple-ios13-macabi -isysroot $MACSYSROOT -I$MACSYSROOT/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/System/iOSSupport/usr/include -iframework $MACSYSROOT/System/iOSSupport/System/Library/Frameworks"
 ./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=$BUILD_ARC-apple-darwin --build=$BUILD_ARC-apple --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$MACSYSROOT/System/iOSSupport/usr/lib/ -isysroot $MACSYSROOT -Wl,-dead_strip -lstdc++"
 
 make -j$THREAD_COUNT
