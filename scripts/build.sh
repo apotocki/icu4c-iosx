@@ -56,7 +56,7 @@ cp -r $ICU4C_FOLDER $ICU_CATALYST_BUILD_FOLDER
 echo "building icu (mac osx: Catalyst)..."
 pushd $ICU_CATALYST_BUILD_FOLDER/source
 
-COMMON_CFLAGS="-arch $HOST_ARC --target=$BUILD_ARC-apple-ios13-macabi -isysroot $MACSYSROOT -I$MACSYSROOT/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/System/iOSSupport/usr/include -iframework $MACSYSROOT/System/iOSSupport/System/Library/Frameworks"
+COMMON_CFLAGS="-arch $HOST_ARC --target=$BUILD_ARC-apple-ios-macabi -isysroot $MACSYSROOT -I$MACSYSROOT/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/System/iOSSupport/usr/include -iframework $MACSYSROOT/System/iOSSupport/System/Library/Frameworks"
 ./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=$BUILD_ARC-apple-darwin --build=$BUILD_ARC-apple --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$MACSYSROOT/System/iOSSupport/usr/lib/ -isysroot $MACSYSROOT -Wl,-dead_strip -lstdc++"
 
 make -j$THREAD_COUNT
