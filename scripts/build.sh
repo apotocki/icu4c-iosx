@@ -4,7 +4,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-ICU_VER=maint/maint-70
+ICU_VER=maint/maint-71
 ################## SETUP END
 DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -25,7 +25,7 @@ ICU4C_FOLDER=icu/icu4c
 
 #explicit 70.1
 pushd icu
-git reset --hard a56dde820dc35665a66f2e9ee8ba58e75049b668
+git reset --hard 131146a5f43955eee68693e1e627df13da1ae384
 popd
 
 if [ ! -f $ICU_BUILD_FOLDER.success ]; then
