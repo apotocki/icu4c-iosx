@@ -13,7 +13,7 @@ This repo provides a universal script for building static ICU libraries for use 
  - Manually
 ```
     # clone the repo
-    git clone -b 71.1.1 --recursive https://github.com/apotocki/icu4c-iosx
+    git clone -b 71.1.2 --recursive https://github.com/apotocki/icu4c-iosx
     
     # build libraries
     cd icu4c-iosx
