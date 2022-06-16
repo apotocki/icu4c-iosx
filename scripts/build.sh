@@ -84,38 +84,40 @@ touch $ICU_IOS_SIM_NATIVE_BUILD_FOLDER.success
 fi
 
 if [ $HOST_ARC == "arm64" ]; then
-    ICU_IOS_SIM_X86_64_BUILD_FOLDER=$ICU_VER_NAME-ios.sim-x86_64-build
-    if [ ! -f $ICU_IOS_SIM_X86_64_BUILD_FOLDER.success ]; then
-        echo preparing build folder $ICU_IOS_SIM_X86_64_BUILD_FOLDER ...
-        if [ -d $ICU_IOS_SIM_X86_64_BUILD_FOLDER ]; then
-            rm -rf $ICU_IOS_SIM_X86_64_BUILD_FOLDER
-        fi
-        cp -r $ICU4C_FOLDER $ICU_IOS_SIM_X86_64_BUILD_FOLDER
-        echo "building icu (iOS: iPhoneSimulator x86_64)..."
-        pushd $ICU_IOS_SIM_X86_64_BUILD_FOLDER/source
-
-        COMMON_CFLAGS="-isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -mios-simulator-version-min=13.4 -I$SIMSYSROOT/SDKs/iPhoneSimulator.sdk/usr/include/"
-        ./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=$BUILD_ARC-apple-darwin --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS -arch x86_64" CXXFLAGS="$COMMON_CFLAGS -arch x86_64 -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$SIMSYSROOT/SDKs/iPhoneSimulator.sdk/usr/lib/ -isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -Wl,-dead_strip -lstdc++"
-        make -j$THREAD_COUNT
-        popd
-        touch $ICU_IOS_SIM_X86_64_BUILD_FOLDER.success 
-    fi    
+    FOREIGN_ARCH=x86_64
+else
+    FOREIGN_ARCH=arm64
 fi
 
+ICU_IOS_SIM_FOREIGN_BUILD_FOLDER=$ICU_VER_NAME-ios.sim-$FOREIGN_ARCH-build
+if [ ! -f $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER.success ]; then
+    echo preparing build folder $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER ...
+    if [ -d $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER ]; then
+        rm -rf $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER
+    fi
+    cp -r $ICU4C_FOLDER $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER
+    echo "building icu (iOS: iPhoneSimulator $FOREIGN_ARCH)..."
+    pushd $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER/source
+
+    COMMON_CFLAGS="-arch $FOREIGN_ARCH -isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -mios-simulator-version-min=13.4 -I$SIMSYSROOT/SDKs/iPhoneSimulator.sdk/usr/include/"
+    ./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=$BUILD_ARC-apple-darwin --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$SIMSYSROOT/SDKs/iPhoneSimulator.sdk/usr/lib/ -isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -Wl,-dead_strip -lstdc++"
+    make -j$THREAD_COUNT
+    popd
+    touch $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER.success 
+fi
+        
 ICU_IOS_SIM_BUILD_FOLDER=$ICU_VER_NAME-ios.sim-build
 if [ ! -f $ICU_IOS_SIM_BUILD_FOLDER.success ]; then
     if [ -d $ICU_IOS_SIM_BUILD_FOLDER ]; then
         rm -rf $ICU_IOS_SIM_BUILD_FOLDER
     fi
     mkdir -p $ICU_IOS_SIM_BUILD_FOLDER/source/lib
-    if [ $HOST_ARC == "arm64" ]; then
-        lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicudata.a $ICU_IOS_SIM_X86_64_BUILD_FOLDER/source/lib/libicudata.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicudata.a
-        lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicui18n.a $ICU_IOS_SIM_X86_64_BUILD_FOLDER/source/lib/libicui18n.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicui18n.a
-        lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicuio.a $ICU_IOS_SIM_X86_64_BUILD_FOLDER/source/lib/libicuio.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicuio.a
-        lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicuuc.a $ICU_IOS_SIM_X86_64_BUILD_FOLDER/source/lib/libicuuc.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicuuc.a
-    else
-        mv $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/*.a $ICU_IOS_SIM_BUILD_FOLDER/source/lib/
-    fi
+    
+    lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicudata.a $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER/source/lib/libicudata.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicudata.a
+    lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicui18n.a $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER/source/lib/libicui18n.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicui18n.a
+    lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicuio.a $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER/source/lib/libicuio.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicuio.a
+    lipo -create $ICU_IOS_SIM_NATIVE_BUILD_FOLDER/source/lib/libicuuc.a $ICU_IOS_SIM_FOREIGN_BUILD_FOLDER/source/lib/libicuuc.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicuuc.a
+    
 fi
 
 ################### BUILD FOR DEV

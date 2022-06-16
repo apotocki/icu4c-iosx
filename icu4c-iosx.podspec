@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "icu4c-iosx"
-    s.version      = "71.1.3"
+    s.version      = "71.1.4"
     s.summary      = "ICU libraries"
     s.homepage     = "https://github.com/apotocki/icu4c-iosx"
     s.license      = "BSD"
