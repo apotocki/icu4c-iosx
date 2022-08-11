@@ -13,7 +13,7 @@ This repo provides a universal script for building static ICU libraries for use 
  - Manually
 ```
     # clone the repo
-    git clone -b 71.1.4 --recursive https://github.com/apotocki/icu4c-iosx
+    git clone -b 71.1.5 --recursive https://github.com/apotocki/icu4c-iosx
     
     # build libraries
     cd icu4c-iosx
@@ -26,7 +26,7 @@ This repo provides a universal script for building static ICU libraries for use 
     use_frameworks!
     pod 'icu4c-iosx', '~> 71.1'
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '71.1.4', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '71.1.5', :submodules => 'true'
 ```    
 install new dependency:
 ```
