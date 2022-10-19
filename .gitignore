@@ -1,3 +1,4 @@
 /.DS_STORE
-/icu4c-maint*
 /product
+/*.success
+/*-build
