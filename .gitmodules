@@ -1,4 +1,4 @@
 [submodule "icu"]
 	path = icu
 	url = https://github.com/unicode-org/icu
-	branch = maint/maint-71
+	branch = maint/maint-72

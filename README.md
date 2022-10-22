@@ -1,8 +1,8 @@
 ## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported versions: 71.1, 70.1, 69.1, 68.2, 62.2
+Supported versions: 72.1, 71.1, 70.1, 69.1, 68.2, 62.2
 
-This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "71" branch corresponds to "maint/maint-71" branch.
+This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "72" branch corresponds to "maint/maint-72" branch.
 
 ## Prerequisites
   1) Xcode must be installed because xcodebuild is used to create xcframeworks
@@ -34,7 +34,7 @@ install new dependency:
 ```
 
 ## As an advertisement…
-The ICU library built by this project has been used in my iOS application on the App Store:
+The ICU libraries built by this project are used in my iOS application on the App Store:
 
 [<table align="center" border=0 cellspacing=0 cellpadding=0><tr><td><img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70"/></td><td><a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br>HEX File Viewer & Editor</td><tr></table>]()
 
