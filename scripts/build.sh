@@ -28,9 +28,7 @@ fi
 
 #explicit 72.1
 pushd icu
-git pull
-git checkout $ICU_VER
-#git reset --hard 131146a5f43955eee68693e1e627df13da1ae384
+git reset --hard ff3514f257ea10afe7e710e9f946f68d256704b1
 popd
 
 # (type, arc, build-arc, cflags, ldflags)
@@ -125,101 +123,6 @@ build_catalyst_libs
 build_sim_libs
 
 generic_build ios arm64 arm "-fembed-bitcode -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=13.4"
-
-#COMMON_CFLAGS="-arch arm64 -fembed-bitcode -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=13.4 -I$DEVSYSROOT/SDKs/iPhoneOS.sdk/usr/include/"
-#./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=arm-apple-darwin --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$DEVSYSROOT/SDKs/iPhoneOS.sdk/usr/lib/ -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -Wl,-dead_strip -lstdc++"
-
-
-#build_catalyst_libs_obs()
-#{
-#if [ ! -f $ICU_VER_NAME-catalyst-$1-build.success ]; then
-#echo preparing build folder $ICU_VER_NAME-catalyst-$1-build ...
-#if [ -d $ICU_VER_NAME-catalyst-$1-build ]; then
-#    rm -rf $ICU_VER_NAME-catalyst-$1-build
-#fi
-#cp -r $ICU4C_FOLDER $ICU_VER_NAME-catalyst-$1-build
-#echo "building icu (mac osx: Catalyst $1)..."
-#pushd $ICU_VER_NAME-catalyst-$1-build/source
-#
-#COMMON_CFLAGS="-arch $1 --target=$2-apple-ios13.4-macabi -isysroot $MACSYSROOT -I$MACSYSROOT/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/System/iOSSupport/usr/include -iframework $MACSYSROOT/System/iOSSupport/System/Library/Frameworks"
-#./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=$BUILD_ARC-apple-darwin --build=$2-apple --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$MACSYSROOT/System/iOSSupport/usr/lib/ -Wl,-dead_strip -lstdc++"
-#
-#make -j$THREAD_COUNT
-#popd
-#touch $ICU_VER_NAME-catalyst-$1-build.success 
-#fi
-#}
-
-#if [ ! -f $ICU_CATALYST_BUILD_FOLDER.success ]; then
-#    echo preparing build folder $ICU_CATALYST_BUILD_FOLDER ...
-#    if [ -d $ICU_CATALYST_BUILD_FOLDER ]; then
-#        rm -rf $ICU_CATALYST_BUILD_FOLDER
-#    fi
-#    mkdir -p $ICU_CATALYST_BUILD_FOLDER/source/lib
-#    build_catalyst_libs arm64 arm
-#    build_catalyst_libs x86_64 x86_64
-#    lipo -create $ICU_VER_NAME-catalyst-arm64-build/source/lib/libicudata.a $ICU_VER_NAME-catalyst-x86_64-build/source/lib/libicudata.a -output $ICU_CATALYST_BUILD_FOLDER/source/lib/libicudata.a
-#    lipo -create $ICU_VER_NAME-catalyst-arm64-build/source/lib/libicui18n.a $ICU_VER_NAME-catalyst-x86_64-build/source/lib/libicui18n.a -output $ICU_CATALYST_BUILD_FOLDER/source/lib/libicui18n.a
-#    lipo -create $ICU_VER_NAME-catalyst-arm64-build/source/lib/libicuio.a $ICU_VER_NAME-catalyst-x86_64-build/source/lib/libicuio.a -output $ICU_CATALYST_BUILD_FOLDER/source/lib/libicuio.a
-#    lipo -create $ICU_VER_NAME-catalyst-arm64-build/source/lib/libicuuc.a $ICU_VER_NAME-catalyst-x86_64-build/source/lib/libicuuc.a -output $ICU_CATALYST_BUILD_FOLDER/source/lib/libicuuc.a
-#    touch $ICU_VER_NAME-ios.sim-$1-build.success 
-#fi
-
-################### BUILD FOR SIM
-#ICU_IOS_SIM_BUILD_FOLDER=$ICU_VER_NAME-ios.sim-build
-#
-#build_sim_libs_obs()
-#{
-#if [ ! -f $ICU_VER_NAME-ios.sim-$1-build.success ]; then
-#echo preparing build folder $ICU_VER_NAME-ios.sim-$1-build ...
-#if [ -d $ICU_VER_NAME-ios.sim-$1-build ]; then
-#    rm -rf $ICU_VER_NAME-ios.sim-$1-build
-#fi
-#cp -r $ICU4C_FOLDER $ICU_VER_NAME-ios.sim-$1-build
-#echo "building icu (iOS: iPhoneSimulator $1)..."
-#pushd $ICU_VER_NAME-ios.sim-$1-build/source
-#
-#COMMON_CFLAGS="-arch $1 -isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -mios-simulator-version-min=13.4 -I$SIMSYSROOT/SDKs/iPhoneSimulator.sdk/usr/include/"
-#./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=$BUILD_ARC-apple-darwin --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$SIMSYSROOT/SDKs/iPhoneSimulator.sdk/usr/lib/ -isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -Wl,-dead_strip -lstdc++"
-#
-#make -j$THREAD_COUNT
-#popd
-#touch $ICU_VER_NAME-ios.sim-$1-build.success 
-#fi
-#}
-
-#if [ ! -f $ICU_IOS_SIM_BUILD_FOLDER.success ]; then
-#    if [ -d $ICU_IOS_SIM_BUILD_FOLDER ]; then
-#        rm -rf $ICU_IOS_SIM_BUILD_FOLDER
-#    fi
-#    mkdir -p $ICU_IOS_SIM_BUILD_FOLDER/source/lib
-#    
-#    build_sim_libs arm64
-#    build_sim_libs x86_64
-#
-#    lipo -create $ICU_VER_NAME-ios.sim-arm64-build/source/lib/libicudata.a $ICU_VER_NAME-ios.sim-x86_64-build/source/lib/libicudata.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicudata.a
-#    lipo -create $ICU_VER_NAME-ios.sim-arm64-build/source/lib/libicui18n.a $ICU_VER_NAME-ios.sim-x86_64-build/source/lib/libicui18n.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicui18n.a
-#    lipo -create $ICU_VER_NAME-ios.sim-arm64-build/source/lib/libicuio.a $ICU_VER_NAME-ios.sim-x86_64-build/source/lib/libicuio.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicuio.a
-#    lipo -create $ICU_VER_NAME-ios.sim-arm64-build/source/lib/libicuuc.a $ICU_VER_NAME-ios.sim-x86_64-build/source/lib/libicuuc.a -output $ICU_IOS_SIM_BUILD_FOLDER/source/lib/libicuuc.a
-#fi
-
-################### BUILD FOR DEVICE
-#ICU_IOS_BUILD_FOLDER=$ICU_VER_NAME-ios.dev-build
-#if [ ! -f $ICU_IOS_BUILD_FOLDER.success ]; then
-#echo preparing build folder $ICU_IOS_BUILD_FOLDER ...
-#if [ -d $ICU_IOS_BUILD_FOLDER ]; then
-#    rm -rf $ICU_IOS_BUILD_FOLDER
-#fi
-#cp -r $ICU4C_FOLDER $ICU_IOS_BUILD_FOLDER
-#echo "building icu (iOS: iPhoneOS)..."
-#pushd $ICU_IOS_BUILD_FOLDER/source
-#
-#COMMON_CFLAGS="-arch arm64 -fembed-bitcode -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=13.4 -I$DEVSYSROOT/SDKs/iPhoneOS.sdk/usr/include/"
-#./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=arm-apple-darwin --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ -L$DEVSYSROOT/SDKs/iPhoneOS.sdk/usr/lib/ -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -Wl,-dead_strip -lstdc++"
-#make -j$THREAD_COUNT
-#popd
-#touch $ICU_IOS_BUILD_FOLDER.success 
-#fi
 
 if [ -d $INSTALL_DIR/frameworks ]; then
     rm -rf $INSTALL_DIR/frameworks
