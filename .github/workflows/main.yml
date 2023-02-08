@@ -7,14 +7,21 @@ on:
 jobs:
   Build:
     runs-on: macos-latest
-    timeout-minutes: 120 # Keeps your builds from running too long
+    timeout-minutes: 120
     steps:
     - uses: actions/checkout@v3
       with: 
         submodules: 'true'
     - name: Build
-      run: scripts/build.sh
-    - uses: actions/upload-artifact@v3
+      run: |
+        scripts/build.sh
+        for i in product/frameworks/*/; do zip -0 -r "${i%/}.zip" "$i" & done; wait
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        name: product
-        path: product
+        files: |
+          product/frameworks/icudata.xcframework
+          product/frameworks/icui18n.xcframework
+          product/frameworks/icuio.xcframework
+          product/frameworks/icuuc.xcframework
