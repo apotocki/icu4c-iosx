@@ -1,5 +1,7 @@
 name: Build ICU
 on:
+  release:
+    types: [published]
   push:
     branches:
       - master
