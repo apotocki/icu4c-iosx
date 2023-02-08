@@ -23,7 +23,4 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          product/frameworks/icudata.xcframework
-          product/frameworks/icui18n.xcframework
-          product/frameworks/icuio.xcframework
-          product/frameworks/icuuc.xcframework
+          product/frameworks/*.xcframework.zip
