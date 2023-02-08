@@ -1,0 +1,26 @@
+name: Build ICU
+on:
+  release:
+    types: [published]
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  Build:
+    runs-on: macos-latest
+    timeout-minutes: 120
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        submodules: 'true'
+    - name: Build
+      run: |
+        scripts/build.sh
+        for i in product/frameworks/*/; do zip -0 -r "${i%/}.zip" "$i" & done; wait
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          product/frameworks/*.xcframework.zip
