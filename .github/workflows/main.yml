@@ -1,0 +1,14 @@
+name: Build ICU
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  Build:
+    runs-on: macos-latest
+    timeout-minutes: 120 # Keeps your builds from running too long
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: scripts/build.sh
