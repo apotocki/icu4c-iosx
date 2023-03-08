@@ -3,8 +3,8 @@ on:
   release:
     types: [published]
   push:
-    branches:
-      - master
+    tags:
+        - **
   workflow_dispatch:
 jobs:
   Build:
@@ -17,10 +17,13 @@ jobs:
     - name: Build
       run: |
         scripts/build.sh
-        for i in product/frameworks/*/; do zip -0 -r "${i%/}.zip" "$i" & done; wait
+        for i in product/frameworks/*.xcframework/; do cd product/frameworks && zip -9 -r -r "$(basename -- $i).zip" $(basename -- $i) & done; wait
+        cd product/frameworks
+        zip -9 -r include.zip include
+        wait
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          product/frameworks/*.xcframework.zip
+          product/frameworks/*.zip
