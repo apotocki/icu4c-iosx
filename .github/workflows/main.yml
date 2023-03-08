@@ -18,7 +18,7 @@ jobs:
       run: |
         scripts/build.sh
         for i in product/frameworks/*.xcframework/; do cd product/frameworks && zip -9 -r -r "$(basename -- $i).zip" $(basename -- $i) & done; wait
-        cd product/frameworks
+        cd product
         zip -9 -r include.zip include
         wait
     - name: Release
@@ -27,3 +27,4 @@ jobs:
       with:
         files: |
           product/frameworks/*.zip
+          product/include.zip
