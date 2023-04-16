@@ -4,7 +4,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-ICU_VER=maint/maint-72
+ICU_VER=maint/maint-73
 ################## SETUP END
 DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -25,11 +25,21 @@ else
     FOREIGN_BUILD_ARC=arm
 fi
 
+#if [ -z "${WITH_DATA_PACKAGING}" ]; then
+#    WITH_DATA_PACKAGING="static"
+#fi
 
-#explicit 72.1
+
+#explicit 73.1
 pushd icu
-git reset --hard ff3514f257ea10afe7e710e9f946f68d256704b1
+git reset --hard 5861e1fd52f1d7673eee38bc3c965aa18b336062
 popd
+
+COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR"
+if [[ ! -z "${WITH_DATA_PACKAGING}" ]]; then
+    echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
+    COMMON_CONFIGURE_ARGS="$COMMON_CONFIGURE_ARGS --with-data-packaging=$WITH_DATA_PACKAGING"
+fi
 
 # (type, arc, build-arc, cflags, ldflags)
 generic_build()
@@ -44,9 +54,13 @@ generic_build()
         pushd $ICU_VER_NAME-$1-$2-build/source
 
         COMMON_CFLAGS="-arch $2 $4"
-        ./configure --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --enable-static --disable-shared prefix=$INSTALL_DIR --host=$BUILD_ARC-apple-darwin --build=$3-apple --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ $5 -Wl,-dead_strip -lstdc++"
+
+        ./configure $COMMON_CONFIGURE_ARGS --disable-tools --disable-extras --disable-tests --disable-samples --disable-dyload --host=$BUILD_ARC-apple-darwin --build=$3-apple --with-cross-build=$BUILD_DIR/$ICU_BUILD_FOLDER/source CFLAGS="$COMMON_CFLAGS" CXXFLAGS="$COMMON_CFLAGS -c -stdlib=libc++ -Wall --std=c++17" LDFLAGS="-stdlib=libc++ $5 -Wl,-dead_strip -lstdc++"
 
         make -j$THREAD_COUNT
+        if [ ! $WITH_DATA_PACKAGING = "static" ]; then
+            cp stubdata/libicudata.a lib/
+        fi
         popd
         touch $ICU_VER_NAME-$1-$2-build.success
     fi
@@ -102,9 +116,12 @@ if [ ! -f $ICU_BUILD_FOLDER.success ]; then
         mkdir -p $INSTALL_DIR
     fi
 
-    ./runConfigureICU MacOSX --enable-static --disable-shared prefix=$INSTALL_DIR CXXFLAGS="--std=c++17"
+    ./runConfigureICU MacOSX $COMMON_CONFIGURE_ARGS CXXFLAGS="--std=c++17"
     make -j$THREAD_COUNT
     make install
+    if [ ! $WITH_DATA_PACKAGING = "static" ]; then
+        cp stubdata/libicudata.a $INSTALL_DIR/lib/
+    fi
     popd
     touch $ICU_BUILD_FOLDER.success
 fi
@@ -114,6 +131,7 @@ if [ -d $ICU_VER_NAME-macos-build ]; then
     rm -rf $ICU_VER_NAME-macos-build
 fi
 mkdir -p $ICU_VER_NAME-macos-build/source/lib
+
 lipo -create $INSTALL_DIR/lib/libicudata.a $ICU_VER_NAME-macos-$FOREIGN_ARC-build/source/lib/libicudata.a -output $ICU_VER_NAME-macos-build/source/lib/libicudata.a
 lipo -create $INSTALL_DIR/lib/libicui18n.a $ICU_VER_NAME-macos-$FOREIGN_ARC-build/source/lib/libicui18n.a -output $ICU_VER_NAME-macos-build/source/lib/libicui18n.a
 lipo -create $INSTALL_DIR/lib/libicuio.a $ICU_VER_NAME-macos-$FOREIGN_ARC-build/source/lib/libicuio.a -output $ICU_VER_NAME-macos-build/source/lib/libicuio.a
