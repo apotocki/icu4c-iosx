@@ -30,9 +30,9 @@ fi
 #fi
 
 
-#explicit 73.1
+#explicit 73.2
 pushd icu
-git reset --hard 5861e1fd52f1d7673eee38bc3c965aa18b336062
+git reset --hard 680f521746a3bd6a86f25f25ee50a62d88b489cf
 popd
 
 COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR"
