@@ -1,6 +1,6 @@
 ## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported versions: 73.1, 72.1, 71.1, 70.1, 69.1, 68.2, 62.2
+Supported versions: 73.2, 73.1, 72.1, 71.1, 70.1, 69.1, 68.2, 62.2
 
 This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "73" branch corresponds to "maint/maint-73" branch.
 
@@ -24,6 +24,7 @@ This repo provides a universal script for building static ICU libraries for use 
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
+
     pod 'icu4c-iosx'
     # or optionally more precisely
     # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :submodules => 'true'

@@ -25,21 +25,17 @@ else
     FOREIGN_BUILD_ARC=arm
 fi
 
-#if [ -z "${WITH_DATA_PACKAGING}" ]; then
-#    WITH_DATA_PACKAGING="static"
-#fi
+if [ -z "${WITH_DATA_PACKAGING}" ]; then
+    WITH_DATA_PACKAGING="static" # archive
+fi
+echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
 
-
-#explicit 73.1
+#explicit 73.2
 pushd icu
-git reset --hard 5861e1fd52f1d7673eee38bc3c965aa18b336062
+git reset --hard 680f521746a3bd6a86f25f25ee50a62d88b489cf
 popd
 
-COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR"
-if [[ ! -z "${WITH_DATA_PACKAGING}" ]]; then
-    echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
-    COMMON_CONFIGURE_ARGS="$COMMON_CONFIGURE_ARGS --with-data-packaging=$WITH_DATA_PACKAGING"
-fi
+COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR --with-data-packaging=$WITH_DATA_PACKAGING"
 
 # (type, arc, build-arc, cflags, ldflags)
 generic_build()
