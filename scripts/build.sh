@@ -4,7 +4,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-ICU_VER=maint/maint-73
+ICU_VER=maint/maint-74
 ################## SETUP END
 DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -30,9 +30,9 @@ if [ -z "${WITH_DATA_PACKAGING}" ]; then
 fi
 echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
 
-#explicit 73.2
+#explicit 74.1
 pushd icu
-git reset --hard 680f521746a3bd6a86f25f25ee50a62d88b489cf
+git reset --hard release-74-1
 popd
 
 COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR --with-data-packaging=$WITH_DATA_PACKAGING"
