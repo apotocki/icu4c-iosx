@@ -2,7 +2,7 @@
 
 Supported versions: 74.1
 
-This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "73" branch corresponds to "maint/maint-73" branch.
+This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "74" branch corresponds to "maint/maint-74" branch.
 
 ## Prerequisites
   1) Xcode must be installed because xcodebuild is used to create xcframeworks

@@ -32,7 +32,7 @@ echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
 
 #explicit 74.1
 pushd icu
-git reset --hard release-74-1
+git reset --hard 9f64d3f2690
 popd
 
 COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR --with-data-packaging=$WITH_DATA_PACKAGING"
