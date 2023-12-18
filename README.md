@@ -1,6 +1,6 @@
 ## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported versions: 74.1
+Supported versions: 74.2
 
 This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "74" branch corresponds to "maint/maint-74" branch.
 
@@ -24,9 +24,9 @@ This repo provides a universal script for building static ICU libraries for use 
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'icu4c-iosx', '~> 74.1'
+    pod 'icu4c-iosx', '~> 74.2'
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '74.1.0', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '74.2.0', :submodules => 'true'
 ```    
 install new dependency:
 ```
@@ -40,6 +40,6 @@ The ICU libraries that have been built by this project are being used in my iOS 
 
 This application is designed to view and edit files at the byte or character level; calculate different hashes, encode/decode, and compress/decompress desired byte regions.
   
-You can support my open source development by trying the [App](https://apps.apple.com/us/app/potohex/id1620963302).
+You can support my open-source development by trying the [App](https://apps.apple.com/us/app/potohex/id1620963302).
 
 Feedback is welcome!
