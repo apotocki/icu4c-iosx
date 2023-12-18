@@ -32,8 +32,8 @@ echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
 
 #explicit 74.2
 pushd icu
-git checkout -f 2d02932
-#git reset --hard 2d02932
+git fetch --depth=1 origin 2d029329c82c7792b985024b2bdab5fc7278fbc8
+git reset --hard 2d029329c82c7792b985024b2bdab5fc7278fbc8
 popd
 
 COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR --with-data-packaging=$WITH_DATA_PACKAGING"
