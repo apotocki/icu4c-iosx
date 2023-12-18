@@ -32,6 +32,7 @@ echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
 
 #explicit 74.2
 pushd icu
+git fetch
 git reset --hard 2d029329c82
 popd
 
