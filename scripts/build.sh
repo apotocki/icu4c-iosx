@@ -5,6 +5,11 @@ THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
 ICU_VER=maint/maint-74
+#MACOSX_VERSION_ARM=12.3
+#MACOSX_VERSION_X86_64=10.13
+IOS_VERSION=13.4
+IOS_SIM_VERSION=13.4
+CATALYST_VERSION=13.4
 ################## SETUP END
 DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -19,10 +24,14 @@ if [ "$HOST_ARC" = "arm64" ]; then
 	BUILD_ARC=arm
     FOREIGN_ARC=x86_64
     FOREIGN_BUILD_ARC=x86_64
+    FOREIGN_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_X86_64}" ] && FOREIGN_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_X86_64"
+    NATIVE_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_ARM}" ] && NATIVE_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_ARM"
 else
 	BUILD_ARC=$HOST_ARC
     FOREIGN_ARC=arm64
     FOREIGN_BUILD_ARC=arm
+    FOREIGN_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_ARM}" ] && FOREIGN_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_ARM"
+    NATIVE_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_X86_64}" ] && NATIVE_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_X86_64"
 fi
 
 if [ -z "${WITH_DATA_PACKAGING}" ]; then
@@ -87,13 +96,13 @@ generic_double_build()
 
 build_catalyst_libs()
 {
-    generic_double_build catalyst "-isysroot $MACSYSROOT --target=apple-ios13.4-macabi"
+    generic_double_build catalyst "-isysroot $MACSYSROOT --target=apple-ios$CATALYST_VERSION-macabi"
     # "--target=arm-apple-ios13.4-macabi" "--target=x86_64-apple-ios13.4-macabi" "-L$MACSYSROOT/System/iOSSupport/usr/lib/"
 }
 
 build_sim_libs()
 {
-    CFLAGS="-isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -mios-simulator-version-min=13.4 "
+    CFLAGS="-isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -mios-simulator-version-min=$IOS_SIM_VERSION "
     generic_double_build ios.sim "$CFLAGS"
 }
 
@@ -113,7 +122,8 @@ if [ ! -f $ICU_BUILD_FOLDER.success ]; then
         mkdir -p $INSTALL_DIR
     fi
 
-    ./runConfigureICU MacOSX $COMMON_CONFIGURE_ARGS CXXFLAGS="--std=c++17"
+    CFLAGS="$NATIVE_BUILD_FLAGS" CXXFLAGS="--std=c++17 $NATIVE_BUILD_FLAGS" ./runConfigureICU MacOSX $COMMON_CONFIGURE_ARGS
+
     make -j$THREAD_COUNT
     make install
     if [ ! $WITH_DATA_PACKAGING = "static" ]; then
@@ -123,7 +133,7 @@ if [ ! -f $ICU_BUILD_FOLDER.success ]; then
     touch $ICU_BUILD_FOLDER.success
 fi
 
-generic_build macos $FOREIGN_ARC $FOREIGN_BUILD_ARC
+generic_build macos $FOREIGN_ARC $FOREIGN_BUILD_ARC $FOREIGN_BUILD_FLAGS
 if [ -d $ICU_VER_NAME-macos-build ]; then
     rm -rf $ICU_VER_NAME-macos-build
 fi
@@ -137,7 +147,7 @@ lipo -create $INSTALL_DIR/lib/libicuuc.a $ICU_VER_NAME-macos-$FOREIGN_ARC-build/
 build_catalyst_libs
 build_sim_libs
 
-generic_build ios arm64 arm "-fembed-bitcode -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=13.4"
+generic_build ios arm64 arm "-fembed-bitcode -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=$IOS_VERSION"
 
 if [ -d $INSTALL_DIR/frameworks ]; then
     rm -rf $INSTALL_DIR/frameworks
