@@ -11,9 +11,11 @@ IOS_VERSION=13.4
 IOS_SIM_VERSION=13.4
 CATALYST_VERSION=13.4
 ################## SETUP END
-DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
-SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
+IOSSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
+IOSSIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
 MACSYSROOT=$XCODE_ROOT/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+XROSSYSROOT=$XCODE_ROOT/Platforms/XROS.platform/Developer
+XROSSIMSYSROOT=$XCODE_ROOT/Platforms/XRSimulator.platform/Developer
 
 ICU_VER_NAME=icu4c-${ICU_VER//\//-}
 BUILD_DIR="$( cd "$( dirname "./" )" >/dev/null 2>&1 && pwd )"
@@ -100,10 +102,16 @@ build_catalyst_libs()
     # "--target=arm-apple-ios13.4-macabi" "--target=x86_64-apple-ios13.4-macabi" "-L$MACSYSROOT/System/iOSSupport/usr/lib/"
 }
 
-build_sim_libs()
+build_iossim_libs()
 {
-    CFLAGS="-isysroot $SIMSYSROOT/SDKs/iPhoneSimulator.sdk -mios-simulator-version-min=$IOS_SIM_VERSION "
+    CFLAGS="-isysroot $IOSSIMSYSROOT/SDKs/iPhoneSimulator.sdk -mios-simulator-version-min=$IOS_SIM_VERSION "
     generic_double_build ios.sim "$CFLAGS"
+}
+
+build_xrossim_libs()
+{
+    CFLAGS="-isysroot $XROSSIMSYSROOT/SDKs/XRSimulator.sdk "
+    generic_double_build xros.sim "$CFLAGS"
 }
 
 ################### BUILD FOR MAC OSX
@@ -145,19 +153,40 @@ lipo -create $INSTALL_DIR/lib/libicuio.a $ICU_VER_NAME-macos-$FOREIGN_ARC-build/
 lipo -create $INSTALL_DIR/lib/libicuuc.a $ICU_VER_NAME-macos-$FOREIGN_ARC-build/source/lib/libicuuc.a -output $ICU_VER_NAME-macos-build/source/lib/libicuuc.a
 
 build_catalyst_libs
-build_sim_libs
+build_iossim_libs
 
-generic_build ios arm64 arm "-fembed-bitcode -isysroot $DEVSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=$IOS_VERSION"
+if [ -d $XROSSIMSYSROOT/SDKs/XRSimulator.sdk ]; then
+build_xrossim_libs
+fi
+
+generic_build ios arm64 arm "-fembed-bitcode -isysroot $IOSSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=$IOS_VERSION"
+
+if [ -d $XROSSYSROOT ]; then
+generic_build xros arm64 arm "-fembed-bitcode -isysroot $XROSSYSROOT/SDKs/XROS.sdk"
+fi
 
 if [ -d $INSTALL_DIR/frameworks ]; then
     rm -rf $INSTALL_DIR/frameworks
 fi
 mkdir $INSTALL_DIR/frameworks
 
-xcodebuild -create-xcframework -library $ICU_VER_NAME-macos-build/source/lib/libicudata.a -library $ICU_VER_NAME-catalyst-build/source/lib/libicudata.a -library $ICU_VER_NAME-ios.sim-build/source/lib/libicudata.a -library $ICU_VER_NAME-ios-arm64-build/source/lib/libicudata.a -output $INSTALL_DIR/frameworks/icudata.xcframework
+create_xcframework()
+{
+    PARAMS="-library $ICU_VER_NAME-macos-build/source/lib/lib$1.a \
+        -library $ICU_VER_NAME-catalyst-build/source/lib/lib$1.a \
+        -library $ICU_VER_NAME-ios.sim-build/source/lib/lib$1.a \
+        -library $ICU_VER_NAME-ios-arm64-build/source/lib/lib$1.a"
+        
+    if [ -d $XROSSIMSYSROOT/SDKs/XRSimulator.sdk ]; then
+        PARAMS="$PARAMS -library $ICU_VER_NAME-xros.sim-build/source/lib/lib$1.a"
+    fi
+    if [ -d $XROSSYSROOT ]; then
+        PARAMS="$PARAMS -library $ICU_VER_NAME-xros-arm64-build/source/lib/lib$1.a"
+    fi
+    xcodebuild -create-xcframework $PARAMS -output $INSTALL_DIR/frameworks/$1.xcframework
+}
 
-xcodebuild -create-xcframework -library $ICU_VER_NAME-macos-build/source/lib/libicui18n.a -library $ICU_VER_NAME-catalyst-build/source/lib/libicui18n.a -library $ICU_VER_NAME-ios.sim-build/source/lib/libicui18n.a -library $ICU_VER_NAME-ios-arm64-build/source/lib/libicui18n.a -output $INSTALL_DIR/frameworks/icui18n.xcframework
-
-xcodebuild -create-xcframework -library $ICU_VER_NAME-macos-build/source/lib/libicuio.a -library $ICU_VER_NAME-catalyst-build/source/lib/libicuio.a -library $ICU_VER_NAME-ios.sim-build/source/lib/libicuio.a -library $ICU_VER_NAME-ios-arm64-build/source/lib/libicuio.a -output $INSTALL_DIR/frameworks/icuio.xcframework
-
-xcodebuild -create-xcframework -library $ICU_VER_NAME-macos-build/source/lib/libicuuc.a -library $ICU_VER_NAME-catalyst-build/source/lib/libicuuc.a -library $ICU_VER_NAME-ios.sim-build/source/lib/libicuuc.a -library $ICU_VER_NAME-ios-arm64-build/source/lib/libicuuc.a -output $INSTALL_DIR/frameworks/icuuc.xcframework
+create_xcframework icudata
+create_xcframework icui18n
+create_xcframework icuio
+create_xcframework icuuc
