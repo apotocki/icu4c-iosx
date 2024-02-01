@@ -1,8 +1,8 @@
-## ICU for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
+## ICU for iOS, visionOS, macOS (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
 Supported versions: 74.2
 
-This repo provides a universal script for building static ICU libraries for use in iOS and Mac OS X applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "74" branch corresponds to "maint/maint-74" branch.
+This repo provides a universal script for building static ICU libraries for use in iOS, visionOS, and macOS applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "74" branch corresponds to "maint/maint-74" branch.
 
 ## Prerequisites
   1) Xcode must be installed because xcodebuild is used to create xcframeworks
@@ -26,7 +26,7 @@ This repo provides a universal script for building static ICU libraries for use 
     use_frameworks!
     pod 'icu4c-iosx', '~> 74.2'
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '74.2.7', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '74.2.8', :submodules => 'true'
 ```    
 install new dependency:
 ```
