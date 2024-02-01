@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name         = "icu4c-iosx"
     s.version      = "74.2.7"
-    s.summary      = "ICU XCFramework for macOS and iOS, including both arm64 and x86_64 builds for macOS, Mac Catalyst and Simulator."
+    s.summary      = "ICU XCFramework for macOS, iOS, and visionOS, including both arm64 and x86_64 builds for macOS, Mac Catalyst, iOS Simulator, and visionOS Simulator."
     s.homepage     = "https://github.com/apotocki/icu4c-iosx"
     s.license      = "BSD"
     s.author       = { "Alexander Pototskiy" => "alex.a.potocki@gmail.com" }
