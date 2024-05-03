@@ -1,8 +1,8 @@
 ## ICU for iOS, visionOS, macOS (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported versions: 74.2
+Supported versions: 75.1
 
-This repo provides a universal script for building static ICU libraries for use in iOS, visionOS, and macOS applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "74" branch corresponds to "maint/maint-74" branch.
+This repo provides a universal script for building static ICU libraries for use in iOS, visionOS, and macOS applications. The repo contains "icu" submodule that is taken from https://github.com/unicode-org/icu . The repo branches correspond to the suitable branches of ICU repo. E.g. "75" branch corresponds to "maint/maint-75" branch.
 
 ## Prerequisites
   1) Xcode must be installed because xcodebuild is used to create xcframeworks
@@ -13,7 +13,7 @@ This repo provides a universal script for building static ICU libraries for use 
  - Manually
 ```
     # clone the repo
-    git clone -b 74 --recursive https://github.com/apotocki/icu4c-iosx
+    git clone -b 75 --recursive https://github.com/apotocki/icu4c-iosx
     
     # build libraries
     cd icu4c-iosx
@@ -24,9 +24,9 @@ This repo provides a universal script for building static ICU libraries for use 
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'icu4c-iosx', '~> 74.2'
+    pod 'icu4c-iosx', '~> 75.1'
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '74.2.8', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '75.1.0', :submodules => 'true'
 ```    
 install new dependency:
 ```
