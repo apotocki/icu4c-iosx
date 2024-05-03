@@ -4,7 +4,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-ICU_VER=maint/maint-74
+ICU_VER=maint/maint-75
 #MACOSX_VERSION_ARM=12.3
 #MACOSX_VERSION_X86_64=10.13
 IOS_VERSION=13.4
@@ -41,10 +41,10 @@ if [ -z "${WITH_DATA_PACKAGING}" ]; then
 fi
 echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
 
-#explicit 74.2
+#explicit 75.1
 pushd icu
-git fetch --depth=1 origin 2d029329c82c7792b985024b2bdab5fc7278fbc8
-git reset --hard 2d029329c82c7792b985024b2bdab5fc7278fbc8
+git fetch --depth=1 origin 7750081bda4b3bc1768ae03849ec70f67ea10625
+git reset --hard 7750081bda4b3bc1768ae03849ec70f67ea10625
 popd
 
 COMMON_CONFIGURE_ARGS="--enable-static --disable-shared prefix=$INSTALL_DIR --with-data-packaging=$WITH_DATA_PACKAGING"
@@ -172,18 +172,18 @@ mkdir $INSTALL_DIR/frameworks
 
 create_xcframework()
 {
-    PARAMS="-library $ICU_VER_NAME-macos-build/source/lib/lib$1.a \
+    LIBARGS="-library $ICU_VER_NAME-macos-build/source/lib/lib$1.a \
         -library $ICU_VER_NAME-catalyst-build/source/lib/lib$1.a \
         -library $ICU_VER_NAME-ios.sim-build/source/lib/lib$1.a \
         -library $ICU_VER_NAME-ios-arm64-build/source/lib/lib$1.a"
         
     if [ -d $XROSSIMSYSROOT/SDKs/XRSimulator.sdk ]; then
-        PARAMS="$PARAMS -library $ICU_VER_NAME-xros.sim-build/source/lib/lib$1.a"
+        LIBARGS="$LIBARGS -library $ICU_VER_NAME-xros.sim-build/source/lib/lib$1.a"
     fi
-    if [ -d $XROSSYSROOT ]; then
-        PARAMS="$PARAMS -library $ICU_VER_NAME-xros-arm64-build/source/lib/lib$1.a"
+    if [ -d $XROSSYSROOT/SDKs/XROS.sdk ]; then
+        LIBARGS="$LIBARGS -library $ICU_VER_NAME-xros-arm64-build/source/lib/lib$1.a"
     fi
-    xcodebuild -create-xcframework $PARAMS -output $INSTALL_DIR/frameworks/$1.xcframework
+    xcodebuild -create-xcframework $LIBARGS -output $INSTALL_DIR/frameworks/$1.xcframework
 }
 
 create_xcframework icudata
