@@ -26,7 +26,7 @@ This repo provides a universal script for building static ICU libraries for use 
     use_frameworks!
     pod 'icu4c-iosx', '~> 75.1'
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '75.1.0', :submodules => 'true'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '75.1.1', :submodules => 'true'
 ```    
 install new dependency:
 ```
