@@ -41,6 +41,11 @@ if [ -z "${WITH_DATA_PACKAGING}" ]; then
 fi
 echo "USING WITH_DATA_PACKAGING: $WITH_DATA_PACKAGING"
 
+if [ ! -d icu ]; then
+	echo downloading icu ...
+	git clone --depth 1 -b $ICU_VER https://github.com/unicode-org/icu icu
+fi
+
 #explicit 75.1
 pushd icu
 git fetch --depth=1 origin 7750081bda4b3bc1768ae03849ec70f67ea10625
