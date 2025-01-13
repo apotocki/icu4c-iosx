@@ -75,7 +75,7 @@ Add the following lines into your project's Podfile:
     pod 'icu4c-iosx', '~> 76.1'
     
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '76.1.1'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '76.1.2'
 ```    
 install new dependency:
 ```
