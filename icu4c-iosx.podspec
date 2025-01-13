@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "icu4c-iosx"
-    s.version      = "76.1.2"
+    s.version      = "76.1.3"
     s.summary      = "ICU XCFramework for macOS, iOS, watchOS, tvOS, and visionOS, including builds for Mac Catalyst, iOS Simulator, watchOS Simulator, tvOS Simulator, and visionOS Simulator."
     s.homepage     = "https://github.com/apotocki/icu4c-iosx"
     s.license      = "BSD"
@@ -16,6 +16,11 @@ Pod::Spec.new do |s|
     s.tvos.pod_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
     s.watchos.pod_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
     s.visionos.pod_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
+    s.ios.user_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
+    s.osx.user_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
+    s.tvos.user_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
+    s.watchos.user_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
+    s.visionos.user_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
     s.static_framework = true
     s.source       = { :git => "https://github.com/apotocki/icu4c-iosx.git", :tag => "#{s.version}" }
     s.source_files = "product/include/**/*.{h}"
