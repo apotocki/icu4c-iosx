@@ -1,4 +1,5 @@
-[<img src="https://api.gitsponsors.com/api/badge/img?id=324399578" height="40">](https://api.gitsponsors.com/api/badge/link?p=NPm72L5W9c80lAgUQC9ZFIOcWzm3XtlMaD+H3accfOAF/cm6rdxOcdUPSx4dWBNToD9LcHCwdeE674spU68qbUfxmzzZWuW7cApR4mCTP7X4/fW5yZxI/r525DUBDgBs7yuebuKiB6e/cdqME9ozpA==)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=324399578" height="50">](https://api.gitsponsors.com/api/badge/link?p=NPm72L5W9c80lAgUQC9ZFEpobk+WRpTTSKcfPjatfgvYxs/lV9+RVq8iRrDTCF1crxRto6Urf3Ajf62Js3xpY6alyY7zo5YKBJ3weoOy0kDxI0rOPcM8k7cycG0KQARh0xNbR5LWm4etM19sL13aPQ==)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=324399578" height="50">](https://api.gitsponsors.com/api/badge/link?p=NPm72L5W9c80lAgUQC9ZFEpobk+WRpTTSKcfPjatfgvYxs/lV9+RVq8iRrDTCF1crxRto6Urf3Ajf62Js3xpY6alyY7zo5YKBJ3weoOy0kDxI0rOPcM8k7cycG0KQARh0xNbR5LWm4etM19sL13aPQ==)
 
 ## ICU for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
