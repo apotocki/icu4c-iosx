@@ -1,4 +1,6 @@
-[<img src="https://api.gitsponsors.com/api/badge/img?id=324399578" height="20">](https://api.gitsponsors.com/api/badge/link?p=NPm72L5W9c80lAgUQC9ZFIOcWzm3XtlMaD+H3accfOAF/cm6rdxOcdUPSx4dWBNToD9LcHCwdeE674spU68qbUfxmzzZWuW7cApR4mCTP7X4/fW5yZxI/r525DUBDgBs7yuebuKiB6e/cdqME9ozpA==)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=324399578" height="40">](https://api.gitsponsors.com/api/badge/link?p=NPm72L5W9c80lAgUQC9ZFIOcWzm3XtlMaD+H3accfOAF/cm6rdxOcdUPSx4dWBNToD9LcHCwdeE674spU68qbUfxmzzZWuW7cApR4mCTP7X4/fW5yZxI/r525DUBDgBs7yuebuKiB6e/cdqME9ozpA==)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=324399578" height="40">](https://api.gitsponsors.com/api/badge/link?p=NPm72L5W9c80lAgUQC9ZFIOcWzm3XtlMaD+H3accfOAF/cm6rdxOcdUPSx4dWBNToD9LcHCwdeE674spU68qbUfxmzzZWuW7cApR4mCTP7X4/fW5yZxI/r525DUBDgBs7yuebuKiB6e/cdqME9ozpA==)
+
 ## ICU for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
 Supported versions: 76.1, 75.1, 74.2, 74.1, 73.2, 73.1, 72.1, 71.1, 70.1, 69.1, 68.2, 62.2
