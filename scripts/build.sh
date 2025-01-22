@@ -285,13 +285,13 @@ fi
 
 [[ "$BUILD_PLATFORMS" == *watchossim* ]] && build_watchossim_libs
 
-[[ "$BUILD_PLATFORMS" == *"ios "* ]] && generic_build ios arm64 arm "-fembed-bitcode -isysroot $IOSSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=$IOS_VERSION"
+[[ "$BUILD_PLATFORMS" == *"ios "* ]] && generic_build ios arm64 arm "-isysroot $IOSSYSROOT/SDKs/iPhoneOS.sdk -mios-version-min=$IOS_VERSION"
 
-[[ "$BUILD_PLATFORMS" == *"xros "* ]] && generic_build xros arm64 arm "-fembed-bitcode -isysroot $XROSSYSROOT/SDKs/XROS.sdk"
+[[ "$BUILD_PLATFORMS" == *"xros "* ]] && generic_build xros arm64 arm "-isysroot $XROSSYSROOT/SDKs/XROS.sdk"
 
-[[ "$BUILD_PLATFORMS" == *"tvos "* ]] && generic_build tvos arm64 arm "-fembed-bitcode -isysroot $TVOSSYSROOT/SDKs/AppleTVOS.sdk -target arm64-apple-tvos$TVOS_VERSION"
+[[ "$BUILD_PLATFORMS" == *"tvos "* ]] && generic_build tvos arm64 arm "-isysroot $TVOSSYSROOT/SDKs/AppleTVOS.sdk -target arm64-apple-tvos$TVOS_VERSION"
 
-[[ "$BUILD_PLATFORMS" == *"watchos "* ]] && generic_build watchos arm64 arm "-fembed-bitcode -isysroot $WATCHOSSYSROOT/SDKs/WatchOS.sdk -target arm64-apple-watchos$WATCHOS_VERSION"
+[[ "$BUILD_PLATFORMS" == *"watchos "* ]] && generic_build watchos arm64 arm "-isysroot $WATCHOSSYSROOT/SDKs/WatchOS.sdk -target arm64-apple-watchos$WATCHOS_VERSION"
 
 [[ -d $INSTALL_DIR/frameworks ]] && rm -rf $INSTALL_DIR/frameworks
 mkdir -p $INSTALL_DIR/frameworks
