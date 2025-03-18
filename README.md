@@ -1,8 +1,8 @@
 ## ICU for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
-Supported versions: 76.1
+Supported versions: 77.1
 
-This repo provides a universal script for building static ICU libraries for use in iOS, watchOS, tvOS, visionOS, and macOS applications. The actual ICU library version is taken from https://github.com/unicode-org/icu . The branches of the repository generally correspond to the branches of the ICU repository. E.g. "76" branch corresponds to "maint/maint-76" branch.
+This repo provides a universal script for building static ICU libraries for use in iOS, watchOS, tvOS, visionOS, and macOS applications. The actual ICU library version is taken from https://github.com/unicode-org/icu . The branches of the repository generally correspond to the branches of the ICU repository. E.g. "77" branch corresponds to "maint/maint-77" branch.
 
 # Prerequisites
   1) Xcode must be installed as xcodebuild is used to create xcframeworks
@@ -12,7 +12,7 @@ This repo provides a universal script for building static ICU libraries for use 
 # Build Manually
 ```
     # clone the repo
-    git clone -b 76 https://github.com/apotocki/icu4c-iosx
+    git clone -b 77 https://github.com/apotocki/icu4c-iosx
     
     # build libraries
     cd icu4c-iosx
@@ -32,6 +32,7 @@ Here is a list of all possible values for '-p' option:
 macosx,macosx-arm64,macosx-x86_64,macosx-both,ios,iossim,iossim-arm64,iossim-x86_64,iossim-both,catalyst,catalyst-arm64,catalyst-x86_64,catalyst-both,xros,xrossim,xrossim-arm64,xrossim-x86_64,xrossim-both,tvos,tvossim,tvossim-both,tvossim-arm64,tvossim-x86_64,watchos,watchossim,watchossim-both,watchossim-arm64,watchossim-x86_64
 ```
 Suffix '-both' means that xcframeworks will be built for both arm64 and x86_64 architectures.
+The platform names for macosx and simulators without an architecture suffix (e.g. macosx, iossim, tvossim) mean that xcframeworks are only built for the current host architecture.
 
 # ICU Data Archive
 The build.sh script builds the following xcframeworks: icudata, icui18n, icuio, and icuuc.
@@ -39,7 +40,7 @@ By default, 'icudata' is built with the --with-data-packaging=static option (see
 ```
 scripts/build.sh -p=ios,iossim-x86_64 -d=archive
 # builts xcframeworks for iOS and iOS Simulator with x86_64 architecture
-# datafile path is product/share/icu/76.1/icudt76l.dat
+# datafile path is product/share/icu/77.1/icudt77l.dat
 ```
 In that case, during the ICU initialization procedure you have to specify ICU data directory before u_init() call:
 
@@ -47,7 +48,7 @@ In that case, during the ICU initialization procedure you have to specify ICU da
 #include <unicode/putil.h>
 
 ... // somewhere in ICU initialization procedure before u_init call
-u_setDataDirectory("PATH TO THE DIRECTORY WHERE icudt76l.dat is located");
+u_setDataDirectory("PATH TO THE DIRECTORY WHERE icudt77l.dat is located");
 
 u_init(code)
 ...
@@ -72,10 +73,10 @@ scripts/build.sh -p=ios,iossim-x86_64 --rebuild
 Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'icu4c-iosx', '~> 76.1'
+    pod 'icu4c-iosx', '~> 77.1'
     
     # or optionally more precisely
-    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '76.1.4'
+    # pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '77.1.0'
 ```    
 install new dependency:
 ```
