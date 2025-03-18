@@ -4,7 +4,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-ICU_VER=maint/maint-76
+ICU_VER=maint/maint-77
 MACOSX_VERSION_ARM=12.3
 MACOSX_VERSION_X86_64=10.13
 IOS_VERSION=13.4
@@ -134,10 +134,10 @@ if [[ ! -d icu ]]; then
 	git clone --depth 1 -b $ICU_VER https://github.com/unicode-org/icu icu
 fi
 
-#explicit 76.1
+#explicit 77.1
 pushd icu
-git fetch --depth=1 origin 8eca245c7484ac6cc179e3e5f7c1ea7680810f39
-git reset --hard 8eca245c7484ac6cc179e3e5f7c1ea7680810f39
+git fetch --depth=1 origin 457157a92aa053e632cc7fcfd0e12f8a943b2d11
+git reset --hard 457157a92aa053e632cc7fcfd0e12f8a943b2d11
 popd
 
 
