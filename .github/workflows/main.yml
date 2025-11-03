@@ -4,7 +4,7 @@ on:
     types: [published]
   push:
     tags:
-        - 77.**
+        - 78.**
   workflow_dispatch:
 jobs:
   Build:

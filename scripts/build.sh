@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
+
 ################## SETUP BEGIN
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-ICU_VER=maint/maint-77
+ICU_VER=maint/maint-78
 MACOSX_VERSION_ARM=12.3
 MACOSX_VERSION_X86_64=10.13
 IOS_VERSION=13.4
@@ -15,6 +16,7 @@ TVOS_SIM_VERSION=13.0
 WATCHOS_VERSION=11.0
 WATCHOS_SIM_VERSION=11.0
 ################## SETUP END
+
 IOSSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 IOSSIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
 MACSYSROOT=$XCODE_ROOT/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
@@ -59,6 +61,8 @@ ICU_BUILD_FOLDER=$ICU_VER_NAME-macosx-$HOST_ARC-build
 if [[ -z "${WITH_DATA_PACKAGING}" ]]; then
     WITH_DATA_PACKAGING="static" # archive
 fi
+
+REBUILD=false
 
 # parse command line
 for i in "$@"; do
@@ -134,10 +138,10 @@ if [[ ! -d icu ]]; then
 	git clone --depth 1 -b $ICU_VER https://github.com/unicode-org/icu icu
 fi
 
-#explicit 77.1
+#explicit 78.1
 pushd icu
-git fetch --depth=1 origin 457157a92aa053e632cc7fcfd0e12f8a943b2d11
-git reset --hard 457157a92aa053e632cc7fcfd0e12f8a943b2d11
+git fetch --depth=1 origin 
+git reset --hard 
 popd
 
 
@@ -152,6 +156,7 @@ fi
 generic_build()
 {
     if [[ $REBUILD == true ]] || [[ ! -f $ICU_VER_NAME-$1-$2-build.success ]]; then
+        [[ -f $ICU_VER_NAME-$1-$2-build.success ]] rm $ICU_VER_NAME-$1-$2-build.success
         echo preparing build folder $ICU_VER_NAME-$1-$2-build ...
         [[ -d $ICU_VER_NAME-$1-$2-build ]] && rm -rf $ICU_VER_NAME-$1-$2-build
 

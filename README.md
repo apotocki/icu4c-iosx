@@ -1,8 +1,8 @@
 ## ICU for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
-Supported versions: 77.1, 76.1, 75.1, 74.2, 74.1, 73.2, 73.1, 72.1, 71.1, 70.1, 69.1, 68.2, 62.2
+Supported versions: 78.1, 77.1, 76.1, 75.1, 74.2, 74.1, 73.2, 73.1, 72.1, 71.1, 70.1, 69.1, 68.2, 62.2
 
-This repo provides a universal script for building static ICU libraries for use in iOS, watchOS, tvOS, visionOS, and macOS applications. The actual ICU library version is taken from https://github.com/unicode-org/icu . The branches of the repository generally correspond to the branches of the ICU repository. E.g. "77" branch corresponds to "maint/maint-77" branch.
+This repo provides a universal script for building static ICU libraries for use in iOS, watchOS, tvOS, visionOS, and macOS applications. The actual ICU library version is taken from https://github.com/unicode-org/icu . The branches of the repository generally correspond to the branches of the ICU repository. E.g. "78" branch corresponds to "maint/maint-78" branch.
 
 # Prerequisites
   1) Xcode must be installed as xcodebuild is used to create xcframeworks
@@ -40,7 +40,7 @@ By default, 'icudata' is built with the --with-data-packaging=static option (see
 ```
 scripts/build.sh -p=ios,iossim-x86_64 -d=archive
 # builts xcframeworks for iOS and iOS Simulator with x86_64 architecture
-# datafile path is product/share/icu/77.1/icudt77l.dat
+# datafile path is product/share/icu/78.1/icudt78l.dat
 ```
 In that case, during the ICU initialization procedure you have to specify ICU data directory before u_init() call:
 
@@ -48,7 +48,7 @@ In that case, during the ICU initialization procedure you have to specify ICU da
 #include <unicode/putil.h>
 
 ... // somewhere in ICU initialization procedure before u_init call
-u_setDataDirectory("PATH TO THE DIRECTORY WHERE icudt77l.dat is located");
+u_setDataDirectory("PATH TO THE DIRECTORY WHERE icudt78l.dat is located");
 
 u_init(code)
 ...
