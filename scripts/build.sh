@@ -140,8 +140,8 @@ fi
 
 #explicit 78.1
 pushd icu
-git fetch --depth=1 origin 
-git reset --hard 
+git fetch --depth=1 origin 049e0d6a420629ac7db77256987d083a563287b5
+git reset --hard 049e0d6a420629ac7db77256987d083a563287b5
 popd
 
 

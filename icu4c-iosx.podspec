@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "icu4c-iosx"
-    s.version      = "78.1.0"
+    s.version      = "78.1.1"
     s.summary      = "ICU XCFramework for macOS, iOS, watchOS, tvOS, and visionOS, including builds for Mac Catalyst, iOS Simulator, watchOS Simulator, tvOS Simulator, and visionOS Simulator."
     s.homepage     = "https://github.com/apotocki/icu4c-iosx"
     s.license      = "BSD"
