@@ -156,7 +156,7 @@ fi
 generic_build()
 {
     if [[ $REBUILD == true ]] || [[ ! -f $ICU_VER_NAME-$1-$2-build.success ]]; then
-        [[ -f $ICU_VER_NAME-$1-$2-build.success ]] rm $ICU_VER_NAME-$1-$2-build.success
+        [[ -f $ICU_VER_NAME-$1-$2-build.success ]] && rm $ICU_VER_NAME-$1-$2-build.success
         echo preparing build folder $ICU_VER_NAME-$1-$2-build ...
         [[ -d $ICU_VER_NAME-$1-$2-build ]] && rm -rf $ICU_VER_NAME-$1-$2-build
 
