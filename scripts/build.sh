@@ -110,7 +110,7 @@ BUILD_PLATFORMS=" ${BUILD_PLATFORMS//,/ } "
 for i in $BUILD_PLATFORMS; do :;
 if [[ ! ",$BUILD_PLATFORMS_ALL," == *",$i,"* ]]; then
     echo "Unknown platform '$i'"
-    exi1 1
+    exit 1
 fi
 done
 
@@ -118,7 +118,7 @@ if [[ $WITH_DATA_FILTER ]]; then
     [[ ! "$WITH_DATA_FILTER" == "/"* ]] && [[ -f $BUILD_DIR/$WITH_DATA_FILTER ]] && WITH_DATA_FILTER=$BUILD_DIR/$WITH_DATA_FILTER
     if [[ ! -f $WITH_DATA_FILTER ]]; then
         echo "File '$WITH_DATA_FILTER' is not found."
-        exi1 1
+        exit 1
     fi
 fi
 
@@ -138,10 +138,10 @@ if [[ ! -d icu ]]; then
 	git clone --depth 1 -b $ICU_VER https://github.com/unicode-org/icu icu
 fi
 
-#explicit 78.1
+#explicit 78.2
 pushd icu
-git fetch --depth=1 origin 049e0d6a420629ac7db77256987d083a563287b5
-git reset --hard 049e0d6a420629ac7db77256987d083a563287b5
+git fetch --depth=1 origin f1b3db8ecd39d5b3a6eff4d5641b176c7f914dfb
+git reset --hard f1b3db8ecd39d5b3a6eff4d5641b176c7f914dfb
 popd
 
 
