@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+
 ################## SETUP BEGIN
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
@@ -15,6 +16,7 @@ TVOS_SIM_VERSION=13.0
 WATCHOS_VERSION=11.0
 WATCHOS_SIM_VERSION=11.0
 ################## SETUP END
+
 IOSSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 IOSSIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
 MACSYSROOT=$XCODE_ROOT/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
@@ -59,6 +61,8 @@ ICU_BUILD_FOLDER=$ICU_VER_NAME-macosx-$HOST_ARC-build
 if [[ -z "${WITH_DATA_PACKAGING}" ]]; then
     WITH_DATA_PACKAGING="static" # archive
 fi
+
+REBUILD=false
 
 # parse command line
 for i in "$@"; do
@@ -106,7 +110,7 @@ BUILD_PLATFORMS=" ${BUILD_PLATFORMS//,/ } "
 for i in $BUILD_PLATFORMS; do :;
 if [[ ! ",$BUILD_PLATFORMS_ALL," == *",$i,"* ]]; then
     echo "Unknown platform '$i'"
-    exi1 1
+    exit 1
 fi
 done
 
@@ -114,7 +118,7 @@ if [[ $WITH_DATA_FILTER ]]; then
     [[ ! "$WITH_DATA_FILTER" == "/"* ]] && [[ -f $BUILD_DIR/$WITH_DATA_FILTER ]] && WITH_DATA_FILTER=$BUILD_DIR/$WITH_DATA_FILTER
     if [[ ! -f $WITH_DATA_FILTER ]]; then
         echo "File '$WITH_DATA_FILTER' is not found."
-        exi1 1
+        exit 1
     fi
 fi
 
@@ -152,6 +156,7 @@ fi
 generic_build()
 {
     if [[ $REBUILD == true ]] || [[ ! -f $ICU_VER_NAME-$1-$2-build.success ]]; then
+        [[ -f $ICU_VER_NAME-$1-$2-build.success ]] && rm $ICU_VER_NAME-$1-$2-build.success
         echo preparing build folder $ICU_VER_NAME-$1-$2-build ...
         [[ -d $ICU_VER_NAME-$1-$2-build ]] && rm -rf $ICU_VER_NAME-$1-$2-build
 
