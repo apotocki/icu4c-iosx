@@ -9,22 +9,22 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 
 ### Supported ICU Versions
 
-- [78.2](https://github.com/apotocki/icu4c-iosx/tree/78.2)
-- [78.1](https://github.com/apotocki/icu4c-iosx/tree/78.1)
-- [77.1](https://github.com/apotocki/icu4c-iosx/tree/77.1)
-- [76.1](https://github.com/apotocki/icu4c-iosx/tree/76.1)
-- [75.1](https://github.com/apotocki/icu4c-iosx/tree/75.1)
-- [74.2](https://github.com/apotocki/icu4c-iosx/tree/74.2)
-- [74.1](https://github.com/apotocki/icu4c-iosx/tree/74.1)
-- [73.2](https://github.com/apotocki/icu4c-iosx/tree/73.2)
-- [73.1](https://github.com/apotocki/icu4c-iosx/tree/73.1)
-- [72.1](https://github.com/apotocki/icu4c-iosx/tree/72.1)
-- [71.1](https://github.com/apotocki/icu4c-iosx/tree/71.1)
-- [70.1](https://github.com/apotocki/icu4c-iosx/tree/70.1)
-- [69.1](https://github.com/apotocki/icu4c-iosx/tree/69.1)
-- [68.2](https://github.com/apotocki/icu4c-iosx/tree/68.2)
-- [62.2](https://github.com/apotocki/icu4c-iosx/tree/62.2)
-
+- [78.2](https://github.com/apotocki/icu4c-iosx/tree/78.2.0)
+- [78.1](https://github.com/apotocki/icu4c-iosx/tree/78.1.2)
+- [77.1](https://github.com/apotocki/icu4c-iosx/tree/77.1.0)
+- [76.1](https://github.com/apotocki/icu4c-iosx/tree/76.1.4)
+- [75.1](https://github.com/apotocki/icu4c-iosx/tree/75.1.3)
+- [74.2](https://github.com/apotocki/icu4c-iosx/tree/74.2.8)
+- [74.1](https://github.com/apotocki/icu4c-iosx/tree/74.1.0)
+- [73.2](https://github.com/apotocki/icu4c-iosx/tree/73.2.1)
+- [73.1](https://github.com/apotocki/icu4c-iosx/tree/73.1.0)
+- [72.1](https://github.com/apotocki/icu4c-iosx/tree/72.1.1)
+- [71.1](https://github.com/apotocki/icu4c-iosx/tree/71.1.5)
+- [70.1](https://github.com/apotocki/icu4c-iosx/tree/70.1.1)
+- [69.1](https://github.com/apotocki/icu4c-iosx/tree/69.1.2)
+- [68.2](https://github.com/apotocki/icu4c-iosx/tree/68.2.1)
+- [62.2](https://github.com/apotocki/icu4c-iosx/tree/62.2.1)
+  
 ---
 
 ## Prerequisites
