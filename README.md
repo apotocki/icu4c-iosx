@@ -20,7 +20,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 - [73.1](https://github.com/apotocki/icu4c-iosx/tree/73.1.0)
 - [72.1](https://github.com/apotocki/icu4c-iosx/tree/72.1.2)
 - [71.1](https://github.com/apotocki/icu4c-iosx/tree/71.1.6)
-- [70.1](https://github.com/apotocki/icu4c-iosx/tree/70.1.1)
+- [70.1](https://github.com/apotocki/icu4c-iosx/tree/70.1.2)
 - [69.1](https://github.com/apotocki/icu4c-iosx/tree/69.1.2)
 - [68.2](https://github.com/apotocki/icu4c-iosx/tree/68.2.1)
 - [62.2](https://github.com/apotocki/icu4c-iosx/tree/62.2.1)
@@ -108,10 +108,22 @@ During ICU initialization, you must specify the ICU data directory **before** ca
 
 ```c
 #include <unicode/putil.h>
+#include <unicode/uclean.h>
 
+// Specify the directory containing the ICU data file
 u_setDataDirectory("PATH_TO_DIRECTORY_CONTAINING_icudt78l.dat");
 
-u_init(code);
+UErrorCode errCode = U_ZERO_ERROR;
+u_init(&errCode);
+if (U_FAILURE(errCode)) {
+    // Handle initialization error
+    ...
+}
+
+// Use ICU API...
+
+u_cleanup();  // Optional: release ICU resources
+
 ```
 
 ---
