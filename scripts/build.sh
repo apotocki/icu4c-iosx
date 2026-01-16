@@ -144,6 +144,21 @@ git fetch --depth=1 origin 7c7b8bd5702310b972f888299169bc3cc88bf0a6
 git reset --hard 7c7b8bd5702310b972f888299169bc3cc88bf0a6
 popd
 
+echo patching icu...
+
+if [ ! -f icu/icu4c/source/configure.orig ]; then
+	cp -f icu/icu4c/source/configure icu/icu4c/source/configure.orig
+else
+	cp -f icu/icu4c/source/configure.orig icu/icu4c/source/configure
+fi
+patch icu/icu4c/source/configure scripts/configure.patch
+
+if [ ! -f icu/icu4c/source/Makefile.in.orig ]; then
+	cp -f icu/icu4c/source/Makefile.in icu/icu4c/source/Makefile.in.orig
+else
+	cp -f icu/icu4c/source/Makefile.in.orig icu/icu4c/source/Makefile.in
+fi
+patch icu/icu4c/source/Makefile.in scripts/Makefile.in.patch
 
 COMMON_CONFIGURE_ARGS="--enable-static --disable-shared"
 if [[ $WITH_DATA_PACKAGING == "static" ]]; then
