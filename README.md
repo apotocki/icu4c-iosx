@@ -17,7 +17,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 - [74.2](https://github.com/apotocki/icu4c-iosx/tree/74.2.9)
 - [74.1](https://github.com/apotocki/icu4c-iosx/tree/74.1.1)
 - [73.2](https://github.com/apotocki/icu4c-iosx/tree/73.2.2)
-- [73.1](https://github.com/apotocki/icu4c-iosx/tree/73.1.0)
+- [73.1](https://github.com/apotocki/icu4c-iosx/tree/73.1.1)
 - [72.1](https://github.com/apotocki/icu4c-iosx/tree/72.1.2)
 - [71.1](https://github.com/apotocki/icu4c-iosx/tree/71.1.6)
 - [70.1](https://github.com/apotocki/icu4c-iosx/tree/70.1.2)
