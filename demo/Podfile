@@ -6,11 +6,11 @@ install! 'cocoapods', :deterministic_uuids => false
 target 'icu4c-demo (iOS)' do
   use_frameworks!
   pod 'icu4c-iosx'
-  #pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :branch => '69', :submodules => 'true'
+  #pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :branch => '71'
 end
 
 target 'icu4c-demo (macOS)' do
   use_frameworks!
   pod 'icu4c-iosx'
-  #pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :branch => '69', :submodules => 'true'
+  #pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :branch => '71'
 end
