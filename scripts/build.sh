@@ -110,7 +110,7 @@ BUILD_PLATFORMS=" ${BUILD_PLATFORMS//,/ } "
 for i in $BUILD_PLATFORMS; do :;
 if [[ ! ",$BUILD_PLATFORMS_ALL," == *",$i,"* ]]; then
     echo "Unknown platform '$i'"
-    exi1 1
+    exit 1
 fi
 done
 
@@ -118,7 +118,7 @@ if [[ $WITH_DATA_FILTER ]]; then
     [[ ! "$WITH_DATA_FILTER" == "/"* ]] && [[ -f $BUILD_DIR/$WITH_DATA_FILTER ]] && WITH_DATA_FILTER=$BUILD_DIR/$WITH_DATA_FILTER
     if [[ ! -f $WITH_DATA_FILTER ]]; then
         echo "File '$WITH_DATA_FILTER' is not found."
-        exi1 1
+        exit 1
     fi
 fi
 
