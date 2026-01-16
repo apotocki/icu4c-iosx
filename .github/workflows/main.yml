@@ -1,0 +1,30 @@
+name: Build ICU
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+        - 62.**
+  workflow_dispatch:
+jobs:
+  Build:
+    runs-on: macos-latest
+    timeout-minutes: 120
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        submodules: 'true'
+    - name: Build
+      run: |
+        scripts/build.sh -p=macosx-both,ios,iossim-both,catalyst-both,xros,xrossim-both,watchos,watchossim-both,tvos,tvossim-both
+        for i in product/frameworks/*.xcframework/; do cd product/frameworks && zip -9 -r -r "$(basename -- $i).zip" $(basename -- $i) & done; wait
+        cd product
+        zip -9 -r include.zip include
+        wait
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          product/frameworks/*.zip
+          product/include.zip
