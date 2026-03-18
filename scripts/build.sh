@@ -138,10 +138,10 @@ if [[ ! -d icu ]]; then
 	git clone --depth 1 -b $ICU_VER https://github.com/unicode-org/icu icu
 fi
 
-#explicit 78.2
+#explicit 78.3
 pushd icu
-git fetch --depth=1 origin f1b3db8ecd39d5b3a6eff4d5641b176c7f914dfb
-git reset --hard f1b3db8ecd39d5b3a6eff4d5641b176c7f914dfb
+git fetch --depth=1 origin 21d1eb0f306e1141c10931e914dfc038c06121da
+git reset --hard 21d1eb0f306e1141c10931e914dfc038c06121da
 popd
 
 
