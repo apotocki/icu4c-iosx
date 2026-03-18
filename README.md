@@ -9,6 +9,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 
 ### Supported ICU Versions
 
+- [78.3](https://github.com/apotocki/icu4c-iosx/tree/78.3.0)
 - [78.2](https://github.com/apotocki/icu4c-iosx/tree/78.2.0)
 - [78.1](https://github.com/apotocki/icu4c-iosx/tree/78.1.3)
 - [77.1](https://github.com/apotocki/icu4c-iosx/tree/77.1.1)
@@ -101,7 +102,7 @@ To enable this option, use `-d=archive`:
 ```bash
 scripts/build.sh -p=ios,iossim-x86_64 -d=archive
 # Builds XCFrameworks for iOS and the iOS Simulator (x86_64)
-# Data file path: product/share/icu/78.2/icudt78l.dat
+# Data file path: product/share/icu/78.3/icudt78l.dat
 ```
 
 During ICU initialization, you must specify the ICU data directory **before** calling `u_init()`:
@@ -178,7 +179,19 @@ Install the dependency:
 
 The ICU libraries built by this project are used in my iOS application available on the App Store:
 
-[<table align="center" border=0 cellspacing=0 cellpadding=0><tr><td><img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70"/></td><td><a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br>HEX File Viewer & Editor</td><tr></table>]()
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/us/app/potohex/id1620963302">
+        <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br />
+      HEX File Viewer &amp; Editor
+    </td>
+  </tr>
+</table>
 
 PotoHEX is designed for viewing and editing files at the byte or character level, calculating hashes, encoding/decoding data, and compressing/decompressing selected byte ranges.
 
