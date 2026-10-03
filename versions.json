@@ -1,0 +1,92 @@
+{
+  "branches": [
+    {
+      "series": "78",
+      "title": "78.x upstream versions",
+      "versions": [
+        "78.3",
+        "78.2",
+        "78.1"
+      ]
+    },
+    {
+      "series": "77",
+      "title": "77.x upstream versions",
+      "versions": [
+        "77.1"
+      ]
+    },
+    {
+      "series": "76",
+      "title": "76.x upstream versions",
+      "versions": [
+        "76.1"
+      ]
+    },
+    {
+      "series": "75",
+      "title": "75.x upstream versions",
+      "versions": [
+        "75.1"
+      ]
+    },
+    {
+      "series": "74",
+      "title": "74.x upstream versions",
+      "versions": [
+        "74.2",
+        "74.1"
+      ]
+    },
+    {
+      "series": "73",
+      "title": "73.x upstream versions",
+      "versions": [
+        "73.2",
+        "73.1"
+      ]
+    },
+    {
+      "series": "72",
+      "title": "72.x upstream versions",
+      "versions": [
+        "72.1"
+      ]
+    },
+    {
+      "series": "71",
+      "title": "71.x upstream versions",
+      "versions": [
+        "71.1"
+      ]
+    },
+    {
+      "series": "70",
+      "title": "70.x upstream versions",
+      "versions": [
+        "70.1"
+      ]
+    },
+    {
+      "series": "69",
+      "title": "69.x upstream versions",
+      "versions": [
+        "69.1"
+      ]
+    },
+    {
+      "series": "68",
+      "title": "68.x upstream versions",
+      "versions": [
+        "68.2"
+      ]
+    },
+    {
+      "series": "62",
+      "title": "62.x upstream versions",
+      "versions": [
+        "62.2"
+      ]
+    }
+  ]
+}
