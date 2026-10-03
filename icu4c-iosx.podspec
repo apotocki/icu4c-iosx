@@ -1,14 +1,14 @@
 Pod::Spec.new do |s|
     s.name         = "icu4c-iosx"
-    s.version      = "78.3.1"
+    s.version      = "78.3.2"
     s.summary      = "ICU XCFramework for macOS, iOS, watchOS, tvOS, and visionOS, including builds for Mac Catalyst, iOS Simulator, watchOS Simulator, tvOS Simulator, and visionOS Simulator."
     s.homepage     = "https://github.com/apotocki/icu4c-iosx"
     s.license      = "BSD"
     s.author       = { "Alexander Pototskiy" => "alex.a.potocki@gmail.com" }
     s.social_media_url = "https://www.linkedin.com/in/alexander-pototskiy"
-    s.ios.deployment_target = "13.4"
-    s.osx.deployment_target = "11.0"
-    s.tvos.deployment_target = "13.0"
+    s.ios.deployment_target = "15.0"
+    s.osx.deployment_target = "12.0"
+    s.tvos.deployment_target = "15.0"
     s.watchos.deployment_target = "11.0"
     s.visionos.deployment_target = "1.0"
     s.ios.pod_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
