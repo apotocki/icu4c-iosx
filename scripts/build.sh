@@ -301,19 +301,23 @@ fi
 [[ -d $INSTALL_DIR/frameworks ]] && rm -rf $INSTALL_DIR/frameworks
 mkdir -p $INSTALL_DIR/frameworks
 
+# the headers go into icuuc.xcframework only: Xcode copies the headers of every linked
+# XCFramework into one directory and fails on duplicates ("Multiple commands produce")
 build_xcframework()
 {
     LIBARGS=
-    [[ "$BUILD_PLATFORMS" == *macosx* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-macosx-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *catalyst* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-catalyst-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *iossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-iossim-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *xrossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-xrossim-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *tvossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-tvossim-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *watchossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-watchossim-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"ios "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-ios-arm64-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"xros "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-xros-arm64-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"tvos "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-tvos-arm64-build/source/lib/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"watchos "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-watchos-arm64-build/source/lib/lib$1.a"
+    HEADER_ARGS=
+    [[ $1 == icuuc ]] && HEADER_ARGS="-headers $INSTALL_DIR/include"
+    [[ "$BUILD_PLATFORMS" == *macosx* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-macosx-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *catalyst* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-catalyst-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *iossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-iossim-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *xrossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-xrossim-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *tvossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-tvossim-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *watchossim* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-watchossim-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"ios "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-ios-arm64-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"xros "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-xros-arm64-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"tvos "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-tvos-arm64-build/source/lib/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"watchos "* ]] && LIBARGS="$LIBARGS -library $ICU_VER_NAME-watchos-arm64-build/source/lib/lib$1.a $HEADER_ARGS"
 
     xcodebuild -create-xcframework $LIBARGS -output $INSTALL_DIR/frameworks/$1.xcframework
 }
