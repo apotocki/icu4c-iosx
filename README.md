@@ -5,9 +5,9 @@ This repository provides a universal build script for creating **static ICU libr
 The ICU source code is taken from the official Unicode ICU repository:
 https://github.com/unicode-org/icu
 
-Repository branches generally correspond to ICU maintenance branches. For example, the `78` branch corresponds to the `maint/maint-78` branch in the ICU repository.
+Repository branches generally correspond to ICU maintenance branches. For example, the `79` branch corresponds to the `maint/maint-79` branch in the ICU repository.
 
-### Supported ICU Version: 78.3
+### Supported ICU Version: 79.1
 
 ---
 
@@ -29,7 +29,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 
 ```bash
 # Clone the repository
-git clone -b 78.3.3 https://github.com/apotocki/icu4c-iosx
+git clone -b 79.1.0 https://github.com/apotocki/icu4c-iosx
     
 # Build libraries
 cd icu4c-iosx
@@ -85,7 +85,7 @@ To enable this option, use `-d=archive`:
 ```bash
 scripts/build.sh -p=ios,iossim-x86_64 -d=archive
 # Builds XCFrameworks for iOS and the iOS Simulator (x86_64)
-# Data file path: product/share/icu/78.3/icudt78l.dat
+# Data file path: product/share/icu/79.1/icudt79l.dat
 ```
 
 During ICU initialization, you must specify the ICU data directory **before** calling `u_init()`:
@@ -95,7 +95,7 @@ During ICU initialization, you must specify the ICU data directory **before** ca
 #include <unicode/uclean.h>
 
 // Specify the directory containing the ICU data file
-u_setDataDirectory("PATH_TO_DIRECTORY_CONTAINING_icudt78l.dat");
+u_setDataDirectory("PATH_TO_DIRECTORY_CONTAINING_icudt79l.dat");
 
 UErrorCode errCode = U_ZERO_ERROR;
 u_init(&errCode);
@@ -144,10 +144,10 @@ Add the following to your `Podfile`:
 
 ```ruby
 use_frameworks!
-pod 'icu4c-iosx', '~> 78.3'
+pod 'icu4c-iosx', '~> 79.1'
 
 # Or explicitly reference the repository
-# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '78.3.3'
+# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '79.1.0'
 ```    
 
 Install the dependency:
