@@ -1,6 +1,13 @@
 {
   "branches": [
     {
+      "series": "79",
+      "title": "79.x upstream versions",
+      "versions": [
+        "79.1"
+      ]
+    },
+    {
       "series": "78",
       "title": "78.x upstream versions",
       "versions": [

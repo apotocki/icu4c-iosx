@@ -5,10 +5,11 @@ This repository provides a universal build script for creating **static ICU libr
 The ICU source code is taken from the official Unicode ICU repository:
 https://github.com/unicode-org/icu
 
-Repository branches generally correspond to ICU maintenance branches. For example, the `78` branch corresponds to the `maint/maint-78` branch in the ICU repository.
+Repository branches generally correspond to ICU maintenance branches. For example, the `79` branch corresponds to the `maint/maint-79` branch in the ICU repository.
 
 ### Supported ICU Versions
 
+- [79.1](https://github.com/apotocki/icu4c-iosx/tree/79.1.0)
 - [78.3](https://github.com/apotocki/icu4c-iosx/tree/78.3.3)
 - [78.2](https://github.com/apotocki/icu4c-iosx/tree/78.2.0)
 - [78.1](https://github.com/apotocki/icu4c-iosx/tree/78.1.3)
@@ -102,7 +103,7 @@ To enable this option, use `-d=archive`:
 ```bash
 scripts/build.sh -p=ios,iossim-x86_64 -d=archive
 # Builds XCFrameworks for iOS and the iOS Simulator (x86_64)
-# Data file path: product/share/icu/78.3/icudt78l.dat
+# Data file path: product/share/icu/79.1/icudt79l.dat
 ```
 
 During ICU initialization, you must specify the ICU data directory **before** calling `u_init()`:
@@ -112,7 +113,7 @@ During ICU initialization, you must specify the ICU data directory **before** ca
 #include <unicode/uclean.h>
 
 // Specify the directory containing the ICU data file
-u_setDataDirectory("PATH_TO_DIRECTORY_CONTAINING_icudt78l.dat");
+u_setDataDirectory("PATH_TO_DIRECTORY_CONTAINING_icudt79l.dat");
 
 UErrorCode errCode = U_ZERO_ERROR;
 u_init(&errCode);
