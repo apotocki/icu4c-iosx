@@ -29,7 +29,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 
 ```bash
 # Clone the repository
-git clone -b 79.1.0 https://github.com/apotocki/icu4c-iosx
+git clone -b 79.1.1 https://github.com/apotocki/icu4c-iosx
     
 # Build libraries
 cd icu4c-iosx
@@ -147,7 +147,7 @@ use_frameworks!
 pod 'icu4c-iosx', '~> 79.1'
 
 # Or explicitly reference the repository
-# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '79.1.0'
+# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '79.1.1'
 ```    
 
 Install the dependency:
