@@ -29,7 +29,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 
 ```bash
 # Clone the repository
-git clone -b 79.1.1 https://github.com/apotocki/icu4c-iosx
+git clone -b 79.1.2 https://github.com/apotocki/icu4c-iosx
     
 # Build libraries
 cd icu4c-iosx
@@ -144,11 +144,13 @@ Add the following to your `Podfile`:
 
 ```ruby
 use_frameworks!
-pod 'icu4c-iosx', '~> 79.1'
+pod 'icu4c-iosx', '~> 79.1', :source => 'https://github.com/apotocki/cocoapods-specs.git'
 
 # Or explicitly reference the repository
-# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '79.1.1'
+# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '79.1.2'
 ```    
+
+New versions are published to the [apotocki/cocoapods-specs](https://github.com/apotocki/cocoapods-specs) spec repo, because CocoaPods Trunk becomes read-only on December 2, 2026; `:source` makes CocoaPods take the pod from there.
 
 Install the dependency:
 ```bash
@@ -159,7 +161,7 @@ Install the dependency:
 
 ## Used in Production
 
-The ICU libraries built by this project are used in my iOS application available on the App Store:
+The ICU libraries built by this project are used in PotoHEX, my iOS application on the App Store. Please check out my applications:
 
 <table align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -170,14 +172,29 @@ The ICU libraries built by this project are used in my iOS application available
     </td>
     <td>
       <a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br />
-      HEX File Viewer &amp; Editor
+      HEX File Viewer &amp; Editor<br />
+      iOS &middot; App Store
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://play.google.com/store/apps/details?id=com.potohex">
+        <img src="https://play-lh.googleusercontent.com/we6L4zSvYH6K8K19sN7A1aS2Mlkp2kxWN-QSna0vHJEioxFB-dfMGUBUG2m6Bg-VqLaX50_PcgdyJd45A4z8ew=s140" width="70" />
+      </a>
+    </td>
+    <td>
+      <a href="https://play.google.com/store/apps/details?id=com.potohex">Otok Hex</a><br />
+      HEX File Viewer<br />
+      Android &middot; Google Play
     </td>
   </tr>
 </table>
 
 PotoHEX is designed for viewing and editing files at the byte or character level, calculating hashes, encoding/decoding data, and compressing/decompressing selected byte ranges.
 
-If you find this project useful, you can support my open-source work by trying the [App](https://apps.apple.com/us/app/potohex/id1620963302).
+Otok Hex lets you inspect any file's bytes in hex and text on Android, with Wi-Fi access to the files from your PC.
+
+If you find this project useful, you can support my open-source work by trying [PotoHEX](https://apps.apple.com/us/app/potohex/id1620963302) on the App Store or [Otok Hex](https://play.google.com/store/apps/details?id=com.potohex) on Google Play.
 
 ---
 
