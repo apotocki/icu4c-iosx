@@ -9,7 +9,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 
 ### Supported ICU Versions
 
-- [79.1](https://github.com/apotocki/icu4c-iosx/tree/79.1.2)
+- [79.1](https://github.com/apotocki/icu4c-iosx/tree/79.1.3)
 - [78.3](https://github.com/apotocki/icu4c-iosx/tree/78.3.3)
 - [78.2](https://github.com/apotocki/icu4c-iosx/tree/78.2.0)
 - [78.1](https://github.com/apotocki/icu4c-iosx/tree/78.1.3)
