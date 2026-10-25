@@ -29,7 +29,7 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 
 ```bash
 # Clone the repository
-git clone -b 79.1.2 https://github.com/apotocki/icu4c-iosx
+git clone -b 79.1.3 https://github.com/apotocki/icu4c-iosx
     
 # Build libraries
 cd icu4c-iosx
@@ -147,7 +147,7 @@ use_frameworks!
 pod 'icu4c-iosx', '~> 79.1', :source => 'https://github.com/apotocki/cocoapods-specs.git'
 
 # Or explicitly reference the repository
-# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '79.1.2'
+# pod 'icu4c-iosx', :git => 'https://github.com/apotocki/icu4c-iosx', :tag => '79.1.3'
 ```    
 
 New versions are published to the [apotocki/cocoapods-specs](https://github.com/apotocki/cocoapods-specs) spec repo, because CocoaPods Trunk becomes read-only on December 2, 2026; `:source` makes CocoaPods take the pod from there.
