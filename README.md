@@ -1,5 +1,7 @@
 ## ICU for iOS, watchOS, tvOS, visionOS, macOS, Mac Catalyst, and Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
+> **ICU is now available through [otok](https://otok-dev.github.io/)**, which builds it from source on your machine for the platforms of your app: see [Using otok](https://github.com/apotocki/icu4c-iosx/blob/master/README.md#using-otok-recommended) in the `master` branch. otok provides the current versions of ICU; this branch keeps the build scripts of ICU 68.2.2.
+
 This repository provides a universal build script for creating **static ICU libraries** for iOS, watchOS, tvOS, visionOS, macOS, and Mac Catalyst.
 
 The ICU source code is taken from the official Unicode ICU repository:
