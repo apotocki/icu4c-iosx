@@ -1,5 +1,7 @@
 ## ICU for iOS, watchOS, tvOS, visionOS, macOS, Mac Catalyst, and Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
+> **Now available through [otok](https://otok-dev.github.io/).** otok builds ICU from source on your machine, for the platforms of your app, and hands the result to Xcode as a local Swift package: see [Using otok](#using-otok-recommended). The build scripts and the CocoaPods pod described below remain available.
+
 This repository provides a universal build script for creating **static ICU libraries** for iOS, watchOS, tvOS, visionOS, macOS, and Mac Catalyst.
 
 The ICU source code is taken from the official Unicode ICU repository:
@@ -26,6 +28,40 @@ Repository branches generally correspond to ICU maintenance branches. For exampl
 - [69.1](https://github.com/apotocki/icu4c-iosx/tree/69.1.3)
 - [68.2](https://github.com/apotocki/icu4c-iosx/tree/68.2.2)
 - [62.2](https://github.com/apotocki/icu4c-iosx/tree/62.2.3)
+
+---
+
+## Using otok (recommended)
+
+[otok](https://otok-dev.github.io/) builds ICU from source on your machine, with your Xcode, for the platforms and deployment versions of your app, and gives the result to Xcode as a local Swift package of XCFrameworks. Install it (`brew install otok-dev/tap/otok`) and put an `otok.toml` next to your Xcode project:
+
+```toml
+[otok]
+format = 1
+
+[apple]
+platforms = ["ios", "iossim", "macosx"]
+deployment = { ios = "16.0", macos = "13.0" }
+
+[deps.icu4c]
+recipe = "apotocki/icu4c"
+version = "~> 79.1"
+# options = { data = "file" }
+```
+
+```bash
+otok install
+```
+
+Then add the `Otok` directory to your app in Xcode (**File → Add Package Dependencies… → Add Local…**) and add the product `ICU` to your target.
+
+- The data is in the library by default (`data = "static"`). `options = { data = "file" }` replaces `-d=archive`: the data is in `icudt79l.dat`, which otok puts in `data/` of the output, and the application calls `u_setDataDirectory` with its directory before the first use of ICU, as described below. `data = "none"` leaves the data to the application.
+- `data-filter = "icu-filter.json"` replaces `-f`: a data filter of ICU's data build tool, a file of your project.
+- `no-renaming = true` drops the version suffixes of the C functions (`u_strlen`, not `u_strlen_79`), so that Swift can call ICU directly. Outside macOS these are the names of the private API of the system ICU, which App Store review rejects in an executable that still has them as symbols.
+- The privacy manifest of ICU comes with the product.
+- `platforms` takes `ios`, `iossim`, `macosx`, `catalyst`, `tvos`, `tvossim`, `watchos`, `watchossim`, `xros`, `xrossim`; `deployment` gives the minimum OS versions (`ios`, `macos`, `catalyst`, `tvos`, `watchos`, `visionos`) and is required for every platform built.
+- `otok.lock` pins the versions, the recipes and the sources by their hashes: commit it with `otok.toml`. `Otok/` is generated: add it to `.gitignore`.
+- The same recipe builds ICU for Android, Windows and Linux too. Its versions and options are in the [catalog](https://otok-dev.github.io/index/recipes/apotocki/icu4c/) (or `otok info apotocki/icu4c`); moving from the pod is described in [Coming from CocoaPods](https://otok-dev.github.io/start/from-cocoapods/).
 
 ---
 
